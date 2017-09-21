@@ -3,24 +3,23 @@ package assignment1;
 import java.util.HashMap;
 
 public class Q5 {
-  public RandomList theList;
   public int size;
   private int[] randomList;
   private int[] testList;
   public HashMap<String, Integer> result;
 
   public Q5(int size) {
-    theList = new RandomList(size);
-    randomList = theList.getRandomList();
-    testList = theList.getTestList();
+    randomList = RandomListUtil.generateRandomList(size);
+    testList = RandomListUtil.generateTestList();
+    this.size = size;
   }
 
   // binary search with 1/3-2/3 strategy
   public boolean binarySearch(int target, boolean searchRandom) {
     if (searchRandom)
-      return searchOneThird(randomList, 0, theList.getRandomListSize() - 1, target);
+      return searchOneThird(randomList, 0, randomList.length - 1, target);
     else
-      return searchOneThird(testList, 0, theList.getTestListSize() - 1, target);
+      return searchOneThird(testList, 0, testList.length - 1, target);
   }
 
   private boolean searchOneThird(int[] arr, int left, int right, int target) {
@@ -42,6 +41,20 @@ public class Q5 {
     } else {
       return searchOneThird(arr, pivotPos + 1, right, target);
     }
+  }
+
+  public void displayRandomList() {
+    for (int i = 0; i < randomList.length; i++)
+      System.out.println(randomList[i]);
+  }
+
+  public String displayTestList() {
+    StringBuffer sb = new StringBuffer();
+    sb.append("The test list is: \n");
+    for (int i = 0; i < testList.length; i++)
+      sb.append(this.testList[i] + " ");
+
+    return sb.toString();
   }
 
 }

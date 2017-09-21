@@ -3,13 +3,13 @@ package assignment1;
 public class main {
 
   public static void main(String[] args) {
-
-    Q5 solution = new Q5(100000);
+    int size = 2000;
+    Q5 solution = new Q5(size);
 
     boolean searchRandomList = true;
-    int target = 5000;
+    int target = 1500;
 
-    System.out.println(solution.theList.displayRandomList());
+    search(solution, target, searchRandomList);
   }
 
   public static void search(Q5 solution, int target, boolean searchRandomList) {
