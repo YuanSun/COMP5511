@@ -10,28 +10,39 @@ public class RandomListUtil {
 
 
 
-  public static int[] generateRandomList(int size) {
+  public static int[] generateRandomList(int size, boolean normalRange) {
     int[] arr = new int[size];
 
     Random rand = new Random();
-
-    for (int i = 0; i < size; i++) {
-      arr[i] = rand.nextInt(MAXRANGE);
+    if (!normalRange) {
+      for (int i = 0; i < size; i++) {
+        arr[i] = rand.nextInt(MAXRANGE);
+      }
+    } else {
+      for (int i = 0; i < size; i++)
+        arr[i] = rand.nextInt(NORMALRANGE);
     }
-
     sort(arr);
     return arr;
   }
 
   // for test purpose, generate a list which is not random
   // from 1 to MAXRANDOM
-  public static int[] generateTestList() {
-    int[] arr = new int[MAXSIZE];
-    for (int i = 0; i < MAXSIZE; i++) {
-      arr[i] = i + 1;
-    }
+  public static int[] generateTestList(boolean normalSize) {
+    if (!normalSize) {
+      int[] arr = new int[MAXSIZE];
+      for (int i = 0; i < MAXSIZE; i++) {
+        arr[i] = i + 1;
+      }
+      return arr;
+    } else {
+      int[] arr = new int[NORMALSIZE];
+      for (int i = 0; i < NORMALSIZE; i++) {
+        arr[i] = i + 1;
+      }
 
-    return arr;
+      return arr;
+    }
   }
 
   // sort the list via quick sort

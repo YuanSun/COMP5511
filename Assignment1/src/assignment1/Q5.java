@@ -7,11 +7,13 @@ public class Q5 {
   private int[] randomList;
   private int[] testList;
   public HashMap<String, Integer> result;
+  private final static String FOUND = "FoundAtPosition";
 
-  public Q5(int size) {
-    randomList = RandomListUtil.generateRandomList(size);
-    testList = RandomListUtil.generateTestList();
+  public Q5(int size, boolean normalRangeForRandomList, boolean normalSizeForTestList) {
+    randomList = RandomListUtil.generateRandomList(size, normalRangeForRandomList);
+    testList = RandomListUtil.generateTestList(normalSizeForTestList);
     this.size = size;
+    result = new HashMap<>();
   }
 
   // binary search with 1/3-2/3 strategy
@@ -23,15 +25,20 @@ public class Q5 {
   }
 
   private boolean searchOneThird(int[] arr, int left, int right, int target) {
+
     int pivotPos = left + (right - left) / 3;
     int pivot = arr[pivotPos];
-    if (target == pivot)
+    if (target == pivot) {
+      result.put(FOUND, pivotPos);
       return true;
+    }
 
     if ((right - left) <= 2) { // less or equal to 3 elements, do a whole search
       for (int i = left; i <= right; i++) {
-        if (arr[i] == target)
+        if (arr[i] == target) {
+          result.put(FOUND, i);
           return true;
+        }
       }
       return false;
     }
