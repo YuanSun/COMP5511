@@ -8,15 +8,19 @@ public class main {
     boolean normalSizeForTestList = true;
     boolean normalRangeForRandomList = true;
     final String SEARCHTIME = "SearchTime";
-    Q5 solution = new Q5(size, normalRangeForRandomList, normalSizeForTestList);
+    Q5 solutionQ5 = new Q5(size, normalRangeForRandomList, normalSizeForTestList);
 
     boolean searchRandomList = true;
     int target = 1500;
     long startTime = System.nanoTime();
-    search(solution, target, searchRandomList);
+    search(solutionQ5, target, searchRandomList);
     long estimatedTime = System.nanoTime() - startTime;
 
     System.out.println("Time used : " + estimatedTime + " nano secs");
+
+    Q6 solutionQ6 = new Q6(size);
+
+    solutionQ6.sortArrA();
 
   }
 
