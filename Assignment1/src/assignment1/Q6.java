@@ -7,11 +7,11 @@ public class Q6 {
   private int[] arrC;
 
   public Q6(int size) {
-    this.size = size;
     arrA = RandomListUtil.generateRandomList(size, true);
-    arrC = new int[size];
-    arrB = new int[size];
-    for (int i = 0; i < size; i++) {
+    this.size = arrA.length;
+    arrC = new int[this.size];
+    arrB = new int[this.size];
+    for (int i = 0; i < this.size; i++) {
       arrC[i] = 0;
     }
   }
@@ -41,6 +41,6 @@ public class Q6 {
       System.out.print(arr[i] + " ");
     }
 
-    System.out.println("");
+    System.out.print("\n");
   }
 }
