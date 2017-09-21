@@ -3,6 +3,7 @@ package assignment1;
 public class main {
 
   public static void main(String[] args) {
+    // Question 5
     int size = 200000;
     boolean normalSizeForTestList = true;
     boolean normalRangeForRandomList = true;

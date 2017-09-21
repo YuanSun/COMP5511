@@ -1,6 +1,8 @@
 package assignment1;
 
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class RandomListUtil {
   private static final int MAXRANGE = Integer.MAX_VALUE;
@@ -12,15 +14,30 @@ public class RandomListUtil {
 
   public static int[] generateRandomList(int size, boolean normalRange) {
     int[] arr = new int[size];
-
+    Set<Integer> generated = new HashSet<>(); // used to remove duplicates
     Random rand = new Random();
+
     if (!normalRange) {
-      for (int i = 0; i < size; i++) {
-        arr[i] = rand.nextInt(MAXRANGE);
+      while (generated.size() < size) {
+        Integer next = rand.nextInt(MAXRANGE);
+        generated.add(next);
       }
+
+      Integer[] array = generated.toArray(new Integer[size]);
+      for (int i = 0; i < size; i++) {
+        arr[i] = array[i].intValue();
+      }
+
     } else {
-      for (int i = 0; i < size; i++)
-        arr[i] = rand.nextInt(NORMALRANGE);
+      while (generated.size() < size) {
+        Integer next = rand.nextInt(NORMALRANGE);
+        generated.add(next);
+      }
+
+      Integer[] array = generated.toArray(new Integer[size]);
+      for (int i = 0; i < size; i++) {
+        arr[i] = array[i].intValue();
+      }
     }
     sort(arr);
     return arr;
