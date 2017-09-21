@@ -13,6 +13,11 @@ public class RandomListUtil {
 
 
   public static int[] generateRandomList(int size, boolean normalRange) {
+    if (normalRange) {
+      if (size > NORMALRANGE) {
+        size = NORMALRANGE;
+      }
+    }
     int[] arr = new int[size];
     Set<Integer> generated = new HashSet<>(); // used to remove duplicates
     Random rand = new Random();
