@@ -10,7 +10,7 @@ public class Q5 {
   private final static String FOUND = "FoundAtPosition";
 
   public Q5(int size, boolean normalRangeForRandomList, boolean normalSizeForTestList) {
-    randomList = RandomListUtil.generateRandomList(size, normalRangeForRandomList);
+    randomList = RandomListUtil.generateSortedRandomList(size, normalRangeForRandomList);
     testList = RandomListUtil.generateTestList(normalSizeForTestList);
     this.size = size;
     result = new HashMap<>();

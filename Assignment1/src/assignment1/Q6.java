@@ -31,7 +31,10 @@ public class Q6 {
       arrB[arrC[i]] = arrA[i];
     }
 
+    System.out.println("\nOriginal array is ");
     display(arrA);
+
+    System.out.println("\nSorted array is ");
     display(arrB);
   }
 

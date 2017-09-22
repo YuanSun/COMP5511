@@ -44,7 +44,6 @@ public class RandomListUtil {
         arr[i] = array[i].intValue();
       }
     }
-    sort(arr);
     return arr;
   }
 
@@ -101,5 +100,11 @@ public class RandomListUtil {
       quickSort(arr, left, index - 1);
     if (index < right)
       quickSort(arr, index, right);
+  }
+
+  public static int[] generateSortedRandomList(int size, boolean normalRangeForRandomList) {
+    int[] arr = generateRandomList(size, normalRangeForRandomList);
+    sort(arr);
+    return arr;
   }
 }
