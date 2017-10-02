@@ -1,5 +1,7 @@
 package assignment1;
 
+import java.util.Arrays;
+
 public class main {
 
   public static void main(String[] args) {
@@ -11,7 +13,7 @@ public class main {
     Q5 solutionQ5 = new Q5(sizeQ5, normalRangeForRandomList, normalSizeForTestList);
 
     boolean searchRandomList = true;
-    int target = 1500;
+    int target = 1980;
     System.out.println("Question 5\nTarget is " + target);
     long startTime = System.nanoTime();
     search(solutionQ5, target, searchRandomList);
@@ -19,6 +21,11 @@ public class main {
 
     System.out.println("Time used : " + estimatedTime + " nano secs");
 
+    long startTime2 = System.nanoTime();
+    searchPureBinarySearch(solutionQ5, target);
+    long estimatedTime2 = System.nanoTime() - startTime2;
+
+    System.out.println("Pure binary search : " + estimatedTime2 + " nano secs");
 
     // Question 6
     int sizeQ6 = 20;
@@ -36,4 +43,14 @@ public class main {
       System.out.println("No result is found.");
   }
 
+  public static void searchPureBinarySearch(Q5 solution, int target) {
+    int k = solution.pureBinarySearch(target);
+
+    if (k >= 0) {
+      System.out.println(target + " is found.");
+      System.out.println("Found at position " + k);
+    } else {
+      System.out.println("No result is found.");
+    }
+  }
 }

@@ -24,6 +24,11 @@ public class Q5 {
       return searchOneThird(testList, 0, testList.length - 1, target);
   }
 
+  public int pureBinarySearch(int target)
+  {
+    return java.util.Arrays.binarySearch(randomList, target);
+  }
+
   private boolean searchOneThird(int[] arr, int left, int right, int target) {
 
     int pivotPos = left + (right - left) / 3;
