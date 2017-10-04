@@ -5,7 +5,7 @@ package assignment2;
  */
 public class LinkedList<T> {
   private Link<T> first;
-
+  private int numOfElem = 0;
   private static int count = 0;
 
   // constructor
@@ -23,7 +23,7 @@ public class LinkedList<T> {
     return first == null;
   }
 
-  // insert
+  // insert at last
   public void insert(T dd) {
     Link<T> newLink = new Link<T>(dd); // make a new link
     Link<T> current = first;
@@ -40,23 +40,22 @@ public class LinkedList<T> {
     } else {
       previous.next = newLink;
     }
+
+    // increment numOfElem
+    numOfElem++;
   }
 
   /*
-   * Pop out the last element and return the value
+   * Remove the first element and return the value
    * 
    * NEED TO FIX
    */
-  public Link<T> pop() {
+  public Link<T> remove() {
     Link<T> current = first;
-    Link<T> previous = null;
-    while (current != null) {
-      previous = current;
-      current = current.next;
-    }
 
-    previous.next = null;
+    first = first.next;
     return current;
+
   }
 
   public int countItr() {
@@ -71,15 +70,17 @@ public class LinkedList<T> {
     return count;
   }
 
-  public int countRecur(LinkedList<T> list) {
-    if (list.first == null) {
+  /*
+   * count recursively will destroy the linked list So backup the list before countRecur
+   */
+  public int countRecur(Link<T> list) {
+    if (list == null) {
       return count;
     } else {
       count++;
     }
-    list.pop();
 
-    return countRecur(list);
+    return countRecur(list.next);
   }
 
   // display List
