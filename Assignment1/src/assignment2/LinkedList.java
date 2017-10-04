@@ -4,7 +4,7 @@ package assignment2;
  * 
  */
 public class LinkedList<T> {
-  private Link<T> first;
+  protected Link<T> first;
   private int numOfElem = 0;
   private static int count = 0;
 
@@ -13,9 +13,16 @@ public class LinkedList<T> {
     first = null;
   }
 
-  // getter
-  public Link<T> getLink() {
-    return first;
+  public int getNumOfElem() {
+    return this.numOfElem;
+  }
+
+  protected void incrementNumOfElem() {
+    numOfElem++;
+  }
+
+  protected void decrementNumOfElem() {
+    numOfElem--;
   }
 
   // isEmpty
@@ -23,7 +30,7 @@ public class LinkedList<T> {
     return first == null;
   }
 
-  // insert at last
+  // insert AT LAST!!
   public void insert(T dd) {
     Link<T> newLink = new Link<T>(dd); // make a new link
     Link<T> current = first;
@@ -47,13 +54,13 @@ public class LinkedList<T> {
 
   /*
    * Remove the first element and return the value
-   * 
-   * NEED TO FIX
+   *
    */
   public Link<T> remove() {
     Link<T> current = first;
 
     first = first.next;
+    numOfElem--;
     return current;
 
   }
