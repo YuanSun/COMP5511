@@ -10,7 +10,11 @@ public class main {
     linkedList.insert(17);
     linkedList.insert(19);
 
+
     linkedList.displayList();
+    System.out.println(linkedList.pop());
+    System.out.println("Count iterately, the linked list has " + linkedList.countItr() + " element(s).");
+    // System.out.println("Count recursively, the linked list has " + linkedList.countRecur(linkedList) + " element(s).");
   }
 
 }

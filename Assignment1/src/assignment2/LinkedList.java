@@ -6,6 +6,8 @@ package assignment2;
 public class LinkedList<T> {
   private Link<T> first;
 
+  private static int count = 0;
+
   // constructor
   public LinkedList() {
     first = null;
@@ -42,6 +44,8 @@ public class LinkedList<T> {
 
   /*
    * Pop out the last element and return the value
+   * 
+   * NEED TO FIX
    */
   public Link<T> pop() {
     Link<T> current = first;
@@ -53,6 +57,29 @@ public class LinkedList<T> {
 
     previous.next = null;
     return current;
+  }
+
+  public int countItr() {
+    Link<T> current = first;
+    int count = 0;
+
+    while (current != null) {
+      count++;
+      current = current.next; // go to the next item
+    }
+
+    return count;
+  }
+
+  public int countRecur(LinkedList<T> list) {
+    if (list.first == null) {
+      return count;
+    } else {
+      count++;
+    }
+    list.pop();
+
+    return countRecur(list);
   }
 
   // display List
