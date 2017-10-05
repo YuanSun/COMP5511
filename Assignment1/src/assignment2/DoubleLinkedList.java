@@ -49,6 +49,7 @@ public class DoubleLinkedList<T> {
     }
 
     newLink.next = current;
+    last = newLink;
 
     numOfElem++;
   }
@@ -61,17 +62,12 @@ public class DoubleLinkedList<T> {
     return current;
   }
 
-  // remove fromt last
+  // remove from last
   public DoubleLink<T> removeLast() {
-    DoubleLink<T> current = first;
-    DoubleLink<T> previous = null;
-    while (current != last) {
-      previous = current;
-      current = (DoubleLink<T>) current.next;
-    }
+    DoubleLink<T> current = last;
 
-    previous.next = null;
-    last = previous;
+    last = (DoubleLink<T>) last.previous;
+    last.next = null;
     numOfElem--;
     return current;
   }
