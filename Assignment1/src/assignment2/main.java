@@ -18,20 +18,26 @@ public class main {
 
     // Question 5
     DoubleLinkedList<Integer> dlinkedList = new DoubleLinkedList<>();
-    dlinkedList.insert(13);
-    dlinkedList.insert(16);
-    dlinkedList.insert(18);
-    dlinkedList.insert(20);
+    dlinkedList.insert(new DoubleLink<Integer>(13));
+    dlinkedList.insert(new DoubleLink<Integer>(16));
+    dlinkedList.insert(new DoubleLink<Integer>(18));
+    dlinkedList.insert(new DoubleLink<Integer>(20));
 
     dlinkedList.displayList();
 
-    dlinkedList.insertLast(25);
+    dlinkedList.insertLast(new DoubleLink<Integer>(25));
     dlinkedList.displayList();
 
-    System.out.println("Remove from first: " + dlinkedList.remove().data);
-    dlinkedList.displayList();
+    LinkStack<Integer> stack = new LinkStack<Integer>();
+    while (!dlinkedList.isEmpty()) {
+      stack.push(dlinkedList.remove());
+    }
 
-    System.out.println("Remove from last: " + dlinkedList.removeLast().data);
+    while (!stack.isEmpty()) {
+      dlinkedList.insert(stack.pop());
+    }
+
+    System.out.println("\nAfter reverse order:");
     dlinkedList.displayList();
   }
 

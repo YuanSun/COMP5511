@@ -15,8 +15,8 @@ public class DoubleLinkedList<T> {
   }
 
   // Insert at FIRST
-  public void insert(T dd) {
-    DoubleLink<T> newLink = new DoubleLink<T>(dd);
+  public void insert(DoubleLink<T> dd) {
+    DoubleLink<T> newLink = dd;
 
     if (isEmpty()) {
       last = newLink;
@@ -30,8 +30,8 @@ public class DoubleLinkedList<T> {
   /*
    * Insert at LAST NEED TO FIX
    */
-  public void insertLast(T dd) {
-    DoubleLink<T> newLink = new DoubleLink<T>(dd); // make a new link
+  public void insertLast(DoubleLink<T> dd) {
+    DoubleLink<T> newLink = dd; // make a new link
     DoubleLink<T> previous = null;
     DoubleLink<T> current = first;
 
@@ -70,6 +70,10 @@ public class DoubleLinkedList<T> {
     last.next = null;
     numOfElem--;
     return current;
+  }
+
+  public int getNumOfElem() {
+    return numOfElem;
   }
 
   public void displayList() {
