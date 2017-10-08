@@ -1,5 +1,7 @@
 package assignment2;
 
+import java.util.Stack;
+
 public class main {
 
   public static void main(String[] args) {
@@ -17,28 +19,16 @@ public class main {
     System.out.println("Count recursively, the linked list has " + linkedList.countRecur(linkedList.first) + " element(s).");
 
     // Question 5
-    DoubleLinkedList<Integer> dlinkedList = new DoubleLinkedList<>();
-    dlinkedList.insert(new DoubleLink<Integer>(13));
-    dlinkedList.insert(new DoubleLink<Integer>(16));
-    dlinkedList.insert(new DoubleLink<Integer>(18));
-    dlinkedList.insert(new DoubleLink<Integer>(20));
-
-    dlinkedList.displayList();
-
-    dlinkedList.insertLast(new DoubleLink<Integer>(25));
-    dlinkedList.displayList();
-
-    LinkStack<Integer> stack = new LinkStack<Integer>();
-    while (!dlinkedList.isEmpty()) {
-      stack.push(dlinkedList.remove());
+    Stack<SingleLink<Integer>> stack = new Stack<>();
+    while (!linkedList.isEmpty()) {
+      stack.push(linkedList.remove());
     }
-
-    while (!stack.isEmpty()) {
-      dlinkedList.insert(stack.pop());
+    
+    while(!stack.isEmpty()) {
+      linkedList.insert(stack.pop().data);
     }
-
-    System.out.println("\nAfter reverse order:");
-    dlinkedList.displayList();
+    
+    linkedList.displayList();
   }
 
 }
