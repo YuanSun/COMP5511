@@ -1,16 +1,15 @@
 package assignment2;
 
-public class DoubleLink<T> implements Link<T>{
+public class SingleLink<T> implements Link<T>{
   public T data;
-  public Link<T> next;
-  public Link<T> previous;
+  public SingleLink<T> next;
 
-  public DoubleLink(T data) {
+  // constructor
+  public SingleLink(T data) {
     this.data = data;
   }
 
   public void displayLink() {
     System.out.print(data.toString() + " ");
   }
-
 }

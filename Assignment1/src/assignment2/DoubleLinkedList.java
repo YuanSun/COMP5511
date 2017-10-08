@@ -21,7 +21,7 @@ public class DoubleLinkedList<T> {
     if (isEmpty()) {
       last = newLink;
     }
-    newLink.next = first;
+    newLink.next = this.first;
     first = newLink;
 
     numOfElem++;
