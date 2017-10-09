@@ -4,7 +4,7 @@ package assignment2;
  * 
  */
 public class LinkedList<T> {
-  protected Link<T> first;
+  protected SingleLink<T> first;
   private int numOfElem = 0;
   private static int count = 0;
 
@@ -32,9 +32,9 @@ public class LinkedList<T> {
 
   // insert AT LAST!!
   public void insert(T dd) {
-    Link<T> newLink = new Link<T>(dd); // make a new link
-    Link<T> current = first;
-    Link<T> previous = null;
+    SingleLink<T> newLink = new SingleLink<T>(dd); // make a new link
+    SingleLink<T> current = first;
+    SingleLink<T> previous = null;
 
     while (current != null) {
       previous = current;
@@ -56,8 +56,8 @@ public class LinkedList<T> {
    * Remove the first element and return the value
    *
    */
-  public Link<T> remove() {
-    Link<T> current = first;
+  public SingleLink<T> remove() {
+    SingleLink<T> current = first;
 
     first = first.next;
     numOfElem--;
@@ -66,7 +66,7 @@ public class LinkedList<T> {
   }
 
   public int countItr() {
-    Link<T> current = first;
+    SingleLink<T> current = first;
     int count = 0;
 
     while (current != null) {
@@ -80,7 +80,7 @@ public class LinkedList<T> {
   /*
    * count recursively will destroy the linked list So backup the list before countRecur
    */
-  public int countRecur(Link<T> list) {
+  public int countRecur(SingleLink<T> list) {
     if (list == null) {
       return count;
     } else {
@@ -93,7 +93,7 @@ public class LinkedList<T> {
   // display List
   public void displayList() {
     System.out.println("List (first --> last):");
-    Link<T> current = first;
+    SingleLink<T> current = first;
     while (current != null) {
       current.displayLink();
       current = current.next;

@@ -1,7 +1,7 @@
 package assignment2;
 
 public class FirstLastLinkedList<T> extends LinkedList<T> {
-  private Link<T> last;
+  private SingleLink<T> last;
 
   public FirstLastLinkedList() {
     super();
@@ -13,7 +13,7 @@ public class FirstLastLinkedList<T> extends LinkedList<T> {
    */
   @Override
   public void insert(T dd) {
-    Link<T> newLink = new Link<T>(dd);
+    SingleLink<T> newLink = new SingleLink<T>(dd);
 
     if (isEmpty()) {
       last = newLink;
@@ -25,7 +25,7 @@ public class FirstLastLinkedList<T> extends LinkedList<T> {
   }
 
   public void insertLast(T dd) {
-    Link<T> newLink = new Link<T>(dd);
+    SingleLink<T> newLink = new SingleLink<T>(dd);
 
     if (isEmpty()) {
       first = newLink;
@@ -37,9 +37,9 @@ public class FirstLastLinkedList<T> extends LinkedList<T> {
     incrementNumOfElem();
   }
 
-  public Link<T> removeLast() {
-    Link<T> current = first;
-    Link<T> previous = null;
+  public SingleLink<T> removeLast() {
+    SingleLink<T> current = first;
+    SingleLink<T> previous = null;
     while (current != last) {
       previous = current;
       current = current.next;
