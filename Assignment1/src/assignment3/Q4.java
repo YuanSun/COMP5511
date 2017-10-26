@@ -36,4 +36,6 @@ public interface Q4 {
   }
 
   public Map<String, Double> findLowestGPAs(int k);
+
+  public void displayLowestKGPA();
 }
