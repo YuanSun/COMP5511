@@ -22,7 +22,7 @@ public class Q4SortedList implements Q4 {
   // * Insertion algorithm is implemented on two steps: step 2 and step 3
   // * step 2: compare the entry
   // * step 3: insert the entry to a new map based on the comparison
-  private static Map<String, Double> sortByValue(Map<String, Double> unsortMap) {
+  private Map<String, Double> sortByValue(Map<String, Double> unsortMap) {
 
     // 1. Convert Map to List of Map
     List<Map.Entry<String, Double>> list =
