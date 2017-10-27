@@ -2,10 +2,11 @@ package assignment3;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Q4Heap implements Q4 {
-  private ArrayList<Map.Entry<String, Double>> studentGPAMinHeap = new ArrayList<>();
+  private Heap<String, Double> studentGPAMinHeap = new Heap<>();
   private ArrayList<Map.Entry<String, Double>> lowestKGPA = new ArrayList<>();
 
   public Q4Heap() throws FileNotFoundException {
@@ -15,30 +16,26 @@ public class Q4Heap implements Q4 {
     });
   }
 
-  public Map.Entry<String, Double> root() {
-    return studentGPAMinHeap.get(0);
-  }
-
-  public Map.Entry<String, Double> leftChild(Map.Entry<String, Double> node) {
-    return studentGPAMinHeap.get(studentGPAMinHeap.indexOf(node) * 2 + 1);
-  }
-
-  public Map.Entry<String, Double> rightChild(Map.Entry<String, Double> node) {
-    return studentGPAMinHeap.get(studentGPAMinHeap.indexOf(node) * 2 + 2);
-  }
-
-
-
   @Override
   public Map<String, Double> findLowestGPAs(int k) {
-
-    return null;
+    Map<String, Double> lowestGPAs = new HashMap<>();
+    for (int i = 0; i < k; i++) {
+      Map.Entry<String, Double> e = studentGPAMinHeap.removeRoot();
+      lowestGPAs.put(e.getKey(), e.getValue());
+      lowestKGPA.add(e);
+    }
+    return lowestGPAs;
   }
 
   @Override
   public void displayLowestKGPA() {
+    lowestKGPA.forEach(gpa -> {
+      System.out.println(gpa.getKey() + ": " + gpa.getValue());
+    });
+  }
 
-
+  public void peakRoot() {
+    System.out.println(studentGPAMinHeap.ROOT().getKey() + ": " + studentGPAMinHeap.ROOT().getValue());
   }
 
 }

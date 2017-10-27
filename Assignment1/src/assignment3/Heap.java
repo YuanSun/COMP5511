@@ -1,6 +1,5 @@
 package assignment3;
 
-import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
@@ -65,11 +64,10 @@ public class Heap<K, V> extends ArrayList<Map.Entry<String, Double>> {
       }
 
       // shift child up
-      this.set(index, smallest);
-      index = this.indexOf(smallest);
+      int smallestIndex = this.indexOf(smallest);
+      Collections.swap(this, index, smallestIndex);
+      index = smallestIndex;
     } // end while
-
-    this.set(index, top);
   }
 
   // ------------------------------------------------------------------
@@ -105,13 +103,20 @@ public class Heap<K, V> extends ArrayList<Map.Entry<String, Double>> {
   }
 
   // -------------------------------------------------------------------
-  public boolean add(String key, Double value) {
-    Map.Entry<String, Double> e = new SimpleEntry<String, Double>(key, value);
-
+  public boolean add(Map.Entry<String, Double> e) {
     // add the node to the heap, then trickleDown
-    this.add(e);
+    super.add(e);
     trickleUp(this.indexOf(e));
     return true;
+  }
+
+  // ---------------------------------------------------------------------
+  // pop the root
+  public Map.Entry<String, Double> removeRoot() {
+    Collections.swap(this, 0, this.size() - 1);
+    Map.Entry<String, Double> root = this.remove(this.size() - 1);
+    trickleDown(0);
+    return root;
   }
 
   // -------------------------------------------------------------------------
