@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +36,7 @@ public interface Q4 {
     return studentGPA;
   }
 
-  public Map<String, Double> findLowestGPAs(int k);
+  public ArrayList<Map.Entry<String, Double>> findLowestGPAs(int k);
 
   public void displayLowestKGPA();
 }

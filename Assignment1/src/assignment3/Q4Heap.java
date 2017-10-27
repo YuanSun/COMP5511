@@ -2,7 +2,6 @@ package assignment3;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Q4Heap implements Q4 {
@@ -17,14 +16,12 @@ public class Q4Heap implements Q4 {
   }
 
   @Override
-  public Map<String, Double> findLowestGPAs(int k) {
-    Map<String, Double> lowestGPAs = new HashMap<>();
+  public ArrayList<Map.Entry<String, Double>> findLowestGPAs(int k) {
     for (int i = 0; i < k; i++) {
       Map.Entry<String, Double> e = studentGPAMinHeap.removeRoot();
-      lowestGPAs.put(e.getKey(), e.getValue());
       lowestKGPA.add(e);
     }
-    return lowestGPAs;
+    return lowestKGPA;
   }
 
   @Override

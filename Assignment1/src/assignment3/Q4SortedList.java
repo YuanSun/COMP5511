@@ -1,59 +1,58 @@
 package assignment3;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 public class Q4SortedList implements Q4 {
   private Map<String, Double> studentGPA = new HashMap<>();
-  private Map<String, Double> lowestKGPA = new HashMap<>();
+  private ArrayList<Map.Entry<String, Double>> lowestKGPA = new ArrayList<>();
 
   public Q4SortedList() throws FileNotFoundException {
     studentGPA = this.getGPAData();
   }
 
   // * Use insertion algorithm to sort the map by value.
-  // * Insertion algorithm is implemented on two steps: step 2 and step 3
-  // * step 2: compare the entry
-  // * step 3: insert the entry to a new map based on the comparison
-  private Map<String, Double> sortByValue(Map<String, Double> unsortMap) {
+  private ArrayList<Entry<String, Double>> sortByValue(Map<String, Double> unsortMap) {
 
-    // 1. Convert Map to List of Map
-    List<Map.Entry<String, Double>> list =
-        new LinkedList<Map.Entry<String, Double>>(unsortMap.entrySet());
+    // 1. Convert Map to List of Map Entry
+    ArrayList<Map.Entry<String, Double>> list =
+        new ArrayList<Map.Entry<String, Double>>(unsortMap.entrySet());
 
-    // 2. Sort list with Collections.sort(), provide a custom Comparator
-    // Try switch the o1 o2 position for a different order
-    Collections.sort(list, new Comparator<Map.Entry<String, Double>>() {
-      public int compare(Map.Entry<String, Double> o1,
-          Map.Entry<String, Double> o2) {
-        return (o1.getValue()).compareTo(o2.getValue());
+    // 2. Sort the list with Selection Sort
+    ArrayList<Map.Entry<String, Double>> sortedList = selectionSort(list);
+    
+    return sortedList;
+  }
+
+  
+  private ArrayList<Entry<String, Double>> selectionSort(ArrayList<Entry<String, Double>> list) {
+    int length = list.size();
+    
+    for (int i = 0; i < length; i++) {
+      for (int j = i; j > 0; j --) {
+        if(list.get(j).getValue().compareTo(list.get(j-1).getValue()) < 0) {
+          Collections.swap(list, j, j-1);
+        }
       }
-    });
-
-    // 3. Loop the sorted list and put it into a new insertion order Map LinkedHashMap
-    Map<String, Double> sortedMap = new LinkedHashMap<String, Double>();
-    for (Map.Entry<String, Double> entry : list) {
-      sortedMap.put(entry.getKey(), entry.getValue());
     }
-
-    return sortedMap;
+    
+    return list;
   }
 
   @Override
-  public Map<String, Double> findLowestGPAs(int k) {
-    Map<String, Double> sortedStudentGPA = sortByValue(this.studentGPA);
+  public ArrayList<Entry<String, Double>> findLowestGPAs(int k) {
+    ArrayList<Entry<String, Double>> sortedStudentGPA = sortByValue(this.studentGPA);
 
     if (k <= sortedStudentGPA.size()) {
-      lowestKGPA = sortedStudentGPA.entrySet().stream()
-          .limit(k)
-          .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+      lowestKGPA = (ArrayList<Entry<String, Double>>) sortedStudentGPA.stream().limit(k)
+          .collect(Collectors.toList());
+         
+          
       return lowestKGPA;
     } else {
       return null;
@@ -64,8 +63,7 @@ public class Q4SortedList implements Q4 {
 
   @Override
   public void displayLowestKGPA() {
-    Map<String, Double> sortedLowestStudentGPA = sortByValue(lowestKGPA);
-    sortedLowestStudentGPA.entrySet().forEach(gpa -> {
+    lowestKGPA.stream().forEach(gpa -> {
       System.out.println(gpa.getKey() + ": " + gpa.getValue());
     });
   }
