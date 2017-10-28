@@ -16,7 +16,8 @@ public interface Q5 {
     try {
       String line;
       while ((line = br.readLine()) != null) {
-          data.add(line.trim());
+        String name = new String(line.trim().getBytes(), "UTF-8");
+          data.add(name);
       }
     } finally {
         br.close();

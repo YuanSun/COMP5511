@@ -18,7 +18,7 @@ public class main {
 //    q4_2.findLowestGPAs(k);
 //    q4_2.displayLowestKGPA();
     
-    System.out.println("\n\nQuestion 5-1:");
+    System.out.println("\n\nQuestion 5-1: ");
     Q5 q5_1 = new Q5BinarySearch();
     q5_1.displayResult();
 //    ArrayList<String> data = q5_1.getData();
@@ -32,6 +32,10 @@ public class main {
 //        System.out.println(key + ": Not found");
 //      }
 //    });
+    System.out.println("\n\nQuestion 6:");
+    Q6 q6 = new Q6HashTable();
+    q6.displayResult();
+    
   }
 
 }

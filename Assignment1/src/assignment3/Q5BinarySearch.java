@@ -47,7 +47,7 @@ public class Q5BinarySearch implements Q5{
   
   @Override
   public void displayResult() {
-    System.out.println("Binary search result:");
+    System.out.println("Binary Search Result <key: position>");
     Map<String, Integer> results = search();
     results.entrySet().stream()
     .forEach(result -> {

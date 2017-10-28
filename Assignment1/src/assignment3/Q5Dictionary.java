@@ -7,12 +7,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class Q5Diction implements Q5{
+public class Q5Dictionary implements Q5{
   private ArrayList<String> data = new ArrayList<>();
   private ArrayList<String> keyToSearch = new ArrayList<>();
   Map<String, List<Integer>> index = new HashMap<String, List<Integer>>();
   
-  public Q5Diction() throws IOException {
+  public Q5Dictionary() throws IOException {
     data = this.getData();
     keyToSearch = this.getSearchKey();
   }
