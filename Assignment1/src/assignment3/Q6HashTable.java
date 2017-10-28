@@ -80,7 +80,7 @@ public class Q6HashTable implements Q6{
         ++count; //
       }
     }
-   return -1; 
+   return count * -1; 
   }
 
 
@@ -93,7 +93,7 @@ public class Q6HashTable implements Q6{
       if (result.getValue() > 0) {
         System.out.println(result.getKey() + ": " + result.getValue());
       } else {
-        System.out.println(result.getKey() + " not found");
+        System.out.println(result.getKey() + " not found" + " : " + result.getValue() * -1);
       }
     });
     
