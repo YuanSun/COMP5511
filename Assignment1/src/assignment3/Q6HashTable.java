@@ -89,11 +89,12 @@ public class Q6HashTable implements Q6{
     Map<String, Integer> results = search();
     
     System.out.println("Search with hash table <key: numOfProbe>");
+    System.out.printf("%35s : %10s\n", "key", "nunOfProbe");
     results.entrySet().forEach(result -> {
       if (result.getValue() > 0) {
-        System.out.println(result.getKey() + ": " + result.getValue());
+        System.out.printf("%35s : %4d \n",result.getKey(), result.getValue());
       } else {
-        System.out.println(result.getKey() + " not found" + " : " + result.getValue() * -1);
+        System.out.printf("%24s %10s : %4d\n", result.getKey(), "-not found" , result.getValue() * -1);
       }
     });
     

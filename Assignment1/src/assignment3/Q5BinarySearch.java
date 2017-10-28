@@ -56,12 +56,13 @@ public class Q5BinarySearch implements Q5{
   public void displayResult() {
     System.out.println("Binary Search Result <key: position : number of probe>");
     Map<String, Integer> results = search();
+    System.out.printf("%35s : %10s : %4s\n", "key", "Position", "NumOfProb");
     results.entrySet().stream()
     .forEach(result -> {
       if(result.getValue() > 0) {
-        System.out.println(result.getKey() + ": " + result.getValue() + " : " + resultsOfProbe.get(result.getKey()));
+        System.out.printf("%35s : %10d : %4d\n", result.getKey() ,result.getValue(),resultsOfProbe.get(result.getKey()));
       } else {
-        System.out.println(result.getKey() + ": Not found" + " : " + resultsOfProbe.get(result.getKey()));
+        System.out.printf("%35s : %10s : %4d\n", result.getKey() ,"Not found" ,resultsOfProbe.get(result.getKey()));
       }
     });
   }
