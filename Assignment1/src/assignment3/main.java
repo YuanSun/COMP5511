@@ -24,7 +24,7 @@ public class main {
 
     System.out.println("\n\nQuestion 5-2: ");
     Q5 q5_2 = new Q5Dictionary();
-    int diff = ((Q5Dictionary) q5_2).minus("A", "b");
+    int diff = ((Q5Dictionary) q5_2).minus("aAbc", "abb");s
     System.out.println(diff);
 
     // q5_2.displayResult();
@@ -42,9 +42,13 @@ public class main {
     System.out.println("\n\nQuestion 6:");
     Q6 q6 = new Q6HashTable();
     // q6.displayResult();
+    String str = " Ng, Yiu-kai ";
+    String str1 = str.toLowerCase().replaceAll("[^a-zA-Z]", "");
 
-    char[] char1 = new char['a'];
-    char[] char2 = new char['b'];
+    System.out.println(str1);
+    char[] char1 = new char[5];
+
+    char[] char2 = "Bcd".toLowerCase().toCharArray();
 
     System.out.println(char1[0] - char2[0]);
   }

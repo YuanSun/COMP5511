@@ -81,8 +81,10 @@ public class Q5Dictionary implements Q5 {
 
   // numerical value of two strings, then return str1 - str2
   public int minus(String str1, String str2) {
-    char v1[] = str1.toLowerCase().toCharArray();
-    char v2[] = str2.toLowerCase().toCharArray();
+    String str1Adj = str1.replaceAll("[^a-zA-Z]", "");
+    String str2Adj = str2.replaceAll("[^a-zA-Z]", "");
+    char v1[] = str1Adj.toLowerCase().toCharArray();
+    char v2[] = str2Adj.toLowerCase().toCharArray();
     char v1Reverse[] = new char[v1.length];
     for (int i = 0; i < v1.length; i++) {
       v1Reverse[v1.length - 1 - i] = v1[i];
@@ -99,20 +101,20 @@ public class Q5Dictionary implements Q5 {
 
     // calculate difference of char arrays
     for (int i = 0; i > smallLen; i++) {
-      difference[i] = v1Reverse[i] - v2Reverse[i];
+      difference[i] = (int) (v1Reverse[i] - v2Reverse[i]);
     }
 
     if (v1Reverse.length > smallLen) {
       // v1 has more decimal to count diff
       for (int i = smallLen; i < bigLen; i++) {
-        difference[i] = v1Reverse[i];
+        difference[i] = v1Reverse[i] - 'a' - 1;
       }
     }
 
     if (v2Reverse.length > smallLen) {
       // v2 has more decimal to count diff
       for (int i = smallLen; i < bigLen; i++) {
-        difference[i] = v2Reverse[i] * -1;
+        difference[i] = (v2Reverse[i] - 'a') * -1;
       }
     }
 
