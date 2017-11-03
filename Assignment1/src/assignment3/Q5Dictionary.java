@@ -1,7 +1,6 @@
 package assignment3;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -25,12 +24,7 @@ public class Q5Dictionary implements Q5 {
   public Map<String, Integer> search() {
     Map<String, Integer> results = new HashMap<>();
     keysToSearch.forEach(key -> {
-      try {
-        results.put(key, interpolationSearch(key));
-      } catch (UnsupportedEncodingException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
+      results.put(key, interpolationSearch(key));
       resultsOfProbe.put(key, count);
       count = 0;// fresh count
     });
@@ -38,7 +32,7 @@ public class Q5Dictionary implements Q5 {
     return results;
   }
 
-  private int interpolationSearch(String key) throws UnsupportedEncodingException {
+  private int interpolationSearch(String key) {
     // Find indices for two corners
     long lo = 0, hi = (data.size() - 1);
 
@@ -86,7 +80,7 @@ public class Q5Dictionary implements Q5 {
   }
 
   // numerical value of two strings, then return str1 - str2
-  public long minus(String str1, String str2) throws UnsupportedEncodingException {
+  public long minus(String str1, String str2) {
     String str1Adj = str1;
     String str2Adj = str2;
     char[] v1 = str1Adj.toLowerCase().toCharArray();
