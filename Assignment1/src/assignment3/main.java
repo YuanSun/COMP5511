@@ -24,9 +24,9 @@ public class main {
 
     System.out.println("\n\nQuestion 5-2: ");
     Q5 q5_2 = new Q5Dictionary();
-    int diff = ((Q5Dictionary) q5_2).minus("aabc", "abb");
+    long diff = ((Q5Dictionary) q5_2).minus("Azevedo, Ana", "Šaltenis, Simonas");
     System.out.println(diff);
-
+    q5_2.displayResult();
     // q5_2.displayResult();
     // ArrayList<String> data = q5_1.getData();
     // ArrayList<String> keysToSearch = q5_1.getSearchKey();
