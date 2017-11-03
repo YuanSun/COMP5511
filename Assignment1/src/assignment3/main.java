@@ -24,7 +24,7 @@ public class main {
 
     System.out.println("\n\nQuestion 5-2: ");
     Q5 q5_2 = new Q5Dictionary();
-    int diff = ((Q5Dictionary) q5_2).minus("aAbc", "abb");s
+    int diff = ((Q5Dictionary) q5_2).minus("aabc", "abb");
     System.out.println(diff);
 
     // q5_2.displayResult();
@@ -46,11 +46,15 @@ public class main {
     String str1 = str.toLowerCase().replaceAll("[^a-zA-Z]", "");
 
     System.out.println(str1);
-    char[] char1 = new char[5];
+    char[] char1 = "ABC".toLowerCase().toCharArray();
 
-    char[] char2 = "Bcd".toLowerCase().toCharArray();
+    char[] char2 = "Bad".toLowerCase().toCharArray();
 
-    System.out.println(char1[0] - char2[0]);
+    int[] difference = new int[3];
+    for (int i = 0; i < 3; i++) {
+      difference[i] = char1[i] - char2[i];
+    }
+    System.out.println((int) char1[0]);
   }
 
 }

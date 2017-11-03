@@ -83,39 +83,43 @@ public class Q5Dictionary implements Q5 {
   public int minus(String str1, String str2) {
     String str1Adj = str1.replaceAll("[^a-zA-Z]", "");
     String str2Adj = str2.replaceAll("[^a-zA-Z]", "");
-    char v1[] = str1Adj.toLowerCase().toCharArray();
-    char v2[] = str2Adj.toLowerCase().toCharArray();
-    char v1Reverse[] = new char[v1.length];
-    for (int i = 0; i < v1.length; i++) {
-      v1Reverse[v1.length - 1 - i] = v1[i];
-    }
-
-    char v2Reverse[] = new char[v2.length];
-    for (int i = 0; i < v2.length; i++) {
-      v2Reverse[v2.length - 1 - i] = v2[i];
-    }
-
+    char[] v1 = str1Adj.toLowerCase().toCharArray();
+    char[] v2 = str2Adj.toLowerCase().toCharArray();
     int smallLen = Math.min(v1.length, v2.length);
     int bigLen = Math.max(v1.length, v2.length);
+
+
+    int[] v1ReverseNumber = new int[bigLen];
+
+
+    int[] v2ReverseNumber = new int[bigLen];
+
+    if (v1.length < v2.length) {
+      for (int i = 0; i < bigLen - smallLen; i++) {
+        v1ReverseNumber[i] = (int) ('a') - 1;
+      }
+    }
+
+    if (v1.length > v2.length) {
+      for (int i = 0; i < bigLen - smallLen; i++) {
+        v2ReverseNumber[i] = (int) ('a') - 1;
+      }
+    }
+
+    for (int i = 0; i < v1.length; i++) {
+      v1ReverseNumber[v1.length - 1 - i] = (int) (v1[i] - 'a') + 1;
+    }
+
+    for (int i = 0; i < v2.length; i++) {
+      v2ReverseNumber[v2.length - 1 - i] = (int) (v2[i] - 'a') + 1;
+    }
+
+
     int[] difference = new int[bigLen];
 
     // calculate difference of char arrays
-    for (int i = 0; i > smallLen; i++) {
-      difference[i] = (int) (v1Reverse[i] - v2Reverse[i]);
-    }
-
-    if (v1Reverse.length > smallLen) {
-      // v1 has more decimal to count diff
-      for (int i = smallLen; i < bigLen; i++) {
-        difference[i] = v1Reverse[i] - 'a' - 1;
-      }
-    }
-
-    if (v2Reverse.length > smallLen) {
-      // v2 has more decimal to count diff
-      for (int i = smallLen; i < bigLen; i++) {
-        difference[i] = (v2Reverse[i] - 'a') * -1;
-      }
+    for (int i = 0; i < bigLen; i++) {
+      difference[i] = v1ReverseNumber[i] - v2ReverseNumber[i];
     }
 
     // calculate numerical difference
