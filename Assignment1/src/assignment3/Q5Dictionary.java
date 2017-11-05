@@ -95,9 +95,9 @@ public class Q5Dictionary implements Q5 {
         if (i < str1Adj.length() && i < str2Adj.length()) {
             dist = str1Adj.charAt(i) - str2Adj.charAt(i);
         } else if (i < str1Adj.length()) {
-            dist = str1Adj.charAt(i) - 'a' + 1;
+            dist = str1Adj.charAt(i);
         } else {
-            dist = -str2Adj.charAt(i) + 'a' - 1;
+            dist = -str2Adj.charAt(i);
         }
         d = d.add(BigDecimal.valueOf(dist * Math.pow(2, -i*8)));
     }
@@ -105,17 +105,18 @@ public class Q5Dictionary implements Q5 {
     
   }
 
+  // customized comparator, to make sure sort and search using the same comparator
   private class StrComparator implements Comparator<String> {
 
     @Override
     public int compare(String o1, String o2) {
       double result = minus (o1, o2); 
-      double compareFlag = 0.00000001;
-      if (result - compareFlag > 0) {
+      //double compareFlag = 0.00000001;
+      if (result > 0) {
         return 1;
       } 
       
-      if (result - compareFlag < 0) {
+      if (result < 0) {
         return -1;
       } 
       
