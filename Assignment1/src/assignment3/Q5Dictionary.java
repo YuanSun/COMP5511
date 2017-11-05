@@ -1,8 +1,10 @@
 package assignment3;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +18,7 @@ public class Q5Dictionary implements Q5 {
 
   public Q5Dictionary() throws IOException {
     data = this.getData();
-    Collections.sort(data);
+    Collections.sort(data, new StrComparator());
     keysToSearch = this.getSearchKey();
   }
 
@@ -44,8 +46,11 @@ public class Q5Dictionary implements Q5 {
 
       // Probing the position with keeping
       // assume uniform distribution
-      long pos = lo + (((hi - lo) /
-          (minus(data.get((int) hi), data.get((int) lo)))) * (minus(key, data.get((int) lo))));
+      double distBetweenHiandLo = hi - lo;
+      double distBetweenKeyHiandKeyLow = minus(data.get((int) hi), data.get((int) lo));
+      double distBetweenKeyandLow = minus(key, data.get((int) lo));
+      double sumU = distBetweenKeyandLow * distBetweenHiandLo / distBetweenKeyHiandKeyLow;
+      long pos = (long) (lo + Math.ceil(sumU));
 
       // Condition of target found
       if (data.get((int) pos).equals(key)) {
@@ -80,56 +85,42 @@ public class Q5Dictionary implements Q5 {
   }
 
   // numerical value of two strings, then return str1 - str2
-  public long minus(String str1, String str2) {
-    String str1Adj = str1;
-    String str2Adj = str2;
-    char[] v1 = str1Adj.toLowerCase().toCharArray();
-    char[] v2 = str2Adj.toLowerCase().toCharArray();
-    int smallLen = Math.min(v1.length, v2.length);
-    int bigLen = Math.max(v1.length, v2.length);
-
-
-    int[] v1ReverseNumber = new int[bigLen];
-
-
-    int[] v2ReverseNumber = new int[bigLen];
-
-    if (v1.length < v2.length) {
-      for (int i = 0; i < bigLen - smallLen; i++) {
-        v1ReverseNumber[i] = 0;
-      }
+  public double minus(String str1, String str2) {
+    String str1Adj = str1.replaceAll(",", "");
+    String str2Adj = str2.replaceAll(",", "");
+    int maxlen = Math.max(str1Adj.length(), str2Adj.length());
+    BigDecimal d = BigDecimal.ZERO;
+    for (int i = 0; i < maxlen; i++) {
+        int dist;
+        if (i < str1Adj.length() && i < str2Adj.length()) {
+            dist = str1Adj.charAt(i) - str2Adj.charAt(i);
+        } else if (i < str1Adj.length()) {
+            dist = str1Adj.charAt(i) - 'a' + 1;
+        } else {
+            dist = -str2Adj.charAt(i) + 'a' - 1;
+        }
+        d = d.add(BigDecimal.valueOf(dist * Math.pow(2, -i*8)));
     }
-
-    if (v1.length > v2.length) {
-      for (int i = 0; i < bigLen - smallLen; i++) {
-        v2ReverseNumber[i] = 0;
-      }
-    }
-
-    for (int i = 0; i < v1.length; i++) {
-      v1ReverseNumber[bigLen - 1 - i] = (int) (v1[i] - 'a') + 1;
-    }
-
-    for (int i = 0; i < v2.length; i++) {
-      v2ReverseNumber[bigLen - 1 - i] = (int) (v2[i] - 'a') + 1;
-    }
-
-
-    int[] difference = new int[bigLen];
-
-    // calculate difference of char arrays
-    for (int i = 0; i < bigLen; i++) {
-      difference[i] = v1ReverseNumber[i] - v2ReverseNumber[i];
-    }
-
-    // calculate numerical difference
-    double numDiff = 0;
-    for (int i = 0; i < difference.length; i++) {
-      numDiff += (difference[i] * Math.pow(10, i));
-    }
-
-    return (long) numDiff;
+    return d.doubleValue();    
+    
   }
 
+  private class StrComparator implements Comparator<String> {
 
+    @Override
+    public int compare(String o1, String o2) {
+      double result = minus (o1, o2); 
+      double compareFlag = 0.00000001;
+      if (result - compareFlag > 0) {
+        return 1;
+      } 
+      
+      if (result - compareFlag < 0) {
+        return -1;
+      } 
+      
+      return 0;
+    }
+    
+  }
 }
