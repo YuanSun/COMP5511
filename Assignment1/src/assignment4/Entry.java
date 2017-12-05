@@ -95,7 +95,7 @@ public class Entry implements Record {
   }
 
   public boolean match(String pattern) {
-    // need to match name, email, organization
+    // need to match name, email, organization as per assignment requirement
     return (match(pattern, this.name) || match(pattern, this.email) || match(pattern, this.school));
   }
 
