@@ -70,6 +70,30 @@ public class AddressBook {
     return this.addressBook.size();
   }
 
+  public ArrayList<Entry> search(String pattern) {
+    ArrayList<Entry> result = new ArrayList<>();
+    this.addressBook.forEach(entry -> {
+      if (entry.match(pattern)) {
+        result.add(entry);
+      }
+    });
+    displaySearchResult(result);
+    return result;
+  }
+
+  private void displaySearchResult(ArrayList<Entry> result) {
+    System.out.printf("|%1$-40s | %2$-40s | %3$-75s | %4$-20s |\n",
+        "Name", "Email Address", "School", "Country");
+    System.out.printf("|%1$-40s | %2$-40s | %3$-75s | %4$-20s |\n",
+        "----------------------------------------", "----------------------------------------",
+        "---------------------------------------------------------------------------",
+        "--------------------");
+    result.forEach(entry -> {
+      entry.displayRecord();
+      System.out.println();
+    });
+  }
+
   public void displayAddressBook(int... index) {
     System.out.printf("|%1$-40s | %2$-40s | %3$-75s | %4$-20s |\n",
         "Name", "Email Address", "School", "Country");
