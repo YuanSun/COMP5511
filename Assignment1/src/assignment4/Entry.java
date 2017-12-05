@@ -57,14 +57,15 @@ public class Entry implements Record {
     }
 
     public EntryBuilder setEmail(String email) {
-      if (isValid(email)) {
-        this.email = email;
+      String emailAdj = email.trim().replace(' ', '_');
+      if (isValid(emailAdj)) {
+        this.email = emailAdj;
       }
       return this;
     }
 
     private boolean isValid(String email2Validate) {
-      Pattern p = Pattern.compile("[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}");
+      Pattern p = Pattern.compile("[A-Za-z0-9._%-]+@[A-Za-z0-9.-_]+.[A-Za-z]{2,4}");
 
       if (p.matcher(email2Validate.trim()).matches()) {
         return true;
