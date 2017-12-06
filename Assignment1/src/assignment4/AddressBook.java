@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,12 +23,12 @@ public class AddressBook {
   private SortedMap<String, List<Tuple>> countryIndex = new TreeMap<>();
 
 
-  public AddressBook() throws FileNotFoundException {
+  public AddressBook() throws FileNotFoundException, UnsupportedEncodingException {
     URL url = getClass().getResource("ds17s-Asg4-data.txt");
     File file = new File(url.getFile());
     FileInputStream fin = new FileInputStream(file.getAbsolutePath());
     BufferedReader br = new BufferedReader(
-        new InputStreamReader(fin));
+        new InputStreamReader(fin, "utf-8"));
     try {
       String line;
       while ((line = br.readLine()) != null) {
@@ -90,50 +91,49 @@ public class AddressBook {
     displaySearchResult(result);
     return result;
   }
-  
+
   public void createOrgIndex() {
     if (addressBook.isEmpty()) {
       return;
     }
-    
+
     addressBook.forEach(entry -> {
-      if(entry.getSchool() != null) {
+      if (entry.getSchool() != null) {
         List<Tuple> idx = orgIndex.get(entry.getSchool());
-        if(idx == null) {
+        if (idx == null) {
           idx = new LinkedList<Tuple>();
           orgIndex.put(entry.getName(), idx);
         }
-        
-          idx.add(new Tuple(entry.getSchool(), addressBook.indexOf(entry)));
+
+        idx.add(new Tuple(entry.getSchool(), addressBook.indexOf(entry)));
       }
-     });
-    
-    
+    });
+
+
     System.out.println("Organization is indexed");
   }
-  
+
   public void searchWithOrgIndex(String name) {
-    if(orgIndex.isEmpty()) {
+    if (orgIndex.isEmpty()) {
       System.out.println("Data haven't been indexed. Run createOrgIndex() first!!!");
       return;
     }
-    
+
     // enhancement needed:
     /*
-     * name could be input partially
-     * may need pattern matching for enhancement
+     * name could be input partially may need pattern matching for enhancement
      */
-    
+
     Set<Entry> result = new HashSet<Entry>();
-    
+
     List<Tuple> idx = orgIndex.get(name);
-    if(idx != null) {
-      for (Tuple t: idx) {
+    if (idx != null) {
+      for (Tuple t : idx) {
         result.add(addressBook.get(t.position));
       }
     }
-    
-    if(!result.isEmpty()) {
+
+    if (!result.isEmpty()) {
       System.out.println(name + ":");
       result.forEach(entry -> {
         System.out.print(" ");
@@ -189,15 +189,15 @@ public class AddressBook {
     }
 
   }
-  
+
   private class Tuple {
     private String key;
     private int position;
-    
+
     public Tuple(String key, int position) {
       this.key = key;
       this.position = position;
     }
   }
- 
+
 }

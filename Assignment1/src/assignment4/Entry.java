@@ -101,8 +101,7 @@ public class Entry implements Record {
 
   // Question 1: search with Boyer-Moore Algorithm
   /*
-   * Enhacement needed: input pattern and addressbook entry
-   * need to be all in lower case before processing 
+   * Enhacement needed: input pattern and addressbook entry need to be all in lower case before processing
    */
   private boolean match(String pattern, String text) {
     if (text == null) {
