@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
@@ -17,10 +18,9 @@ import java.util.TreeMap;
 public class AddressBook {
   private ArrayList<Entry> addressBook = new ArrayList<>();
   // Question 2: inverted indices for organizations and countries
-  private SortedMap<String, List<Entry>> orgIndex = new TreeMap<>();
-  private SortedMap<String, List<Entry>> countryIndex = new TreeMap<>();
-  private Set<String> orgStopWords = new HashSet<>();
-  private Set<String> countryStopWords = new HashSet<>();
+  private SortedMap<String, List<Tuple>> orgIndex = new TreeMap<>();
+  private SortedMap<String, List<Tuple>> countryIndex = new TreeMap<>();
+
 
   public AddressBook() throws FileNotFoundException {
     URL url = getClass().getResource("ds17s-Asg4-data.txt");
@@ -50,8 +50,6 @@ public class AddressBook {
                 .setEmail(rawData[1] != null ? rawData[1] : "")
                 .setSchool(rawData[2] != null ? rawData[2] : "").build();
             addressBook.add(entry3Para);
-            // add school to stop words of organization
-            orgStopWords.add(rawData[2] != null ? rawData[2] : "");
             break;
 
           case 4:
@@ -60,9 +58,6 @@ public class AddressBook {
                 .setSchool(rawData[2] != null ? rawData[2] : "")
                 .setCountry(rawData[3] != null ? rawData[3] : "").build();
             addressBook.add(entry4Para);
-         // add school to stop words of organization and country
-            orgStopWords.add(rawData[2] != null ? rawData[2] : "");
-            countryStopWords.add(rawData[3] != null ? rawData[3] : "");
             break;
 
           default:
@@ -101,7 +96,53 @@ public class AddressBook {
       return;
     }
     
+    addressBook.forEach(entry -> {
+      if(entry.getSchool() != null) {
+        List<Tuple> idx = orgIndex.get(entry.getSchool());
+        if(idx == null) {
+          idx = new LinkedList<Tuple>();
+          orgIndex.put(entry.getName(), idx);
+        }
+        
+          idx.add(new Tuple(entry.getSchool(), addressBook.indexOf(entry)));
+      }
+     });
     
+    
+    System.out.println("Organization is indexed");
+  }
+  
+  public void searchWithOrgIndex(String name) {
+    if(orgIndex.isEmpty()) {
+      System.out.println("Data haven't been indexed. Run createOrgIndex() first!!!");
+      return;
+    }
+    
+    // enhancement needed:
+    /*
+     * name could be input partially
+     * may need pattern matching for enhancement
+     */
+    
+    Set<Entry> result = new HashSet<Entry>();
+    
+    List<Tuple> idx = orgIndex.get(name);
+    if(idx != null) {
+      for (Tuple t: idx) {
+        result.add(addressBook.get(t.position));
+      }
+    }
+    
+    if(!result.isEmpty()) {
+      System.out.println(name + ":");
+      result.forEach(entry -> {
+        System.out.print(" ");
+        entry.displayRecord();
+        System.out.println();
+      });
+    } else {
+      System.out.println("Nothing found!");
+    }
   }
 
   private void displaySearchResult(ArrayList<Entry> result) {
@@ -147,6 +188,16 @@ public class AddressBook {
         break;
     }
 
+  }
+  
+  private class Tuple {
+    private String key;
+    private int position;
+    
+    public Tuple(String key, int position) {
+      this.key = key;
+      this.position = position;
+    }
   }
  
 }
