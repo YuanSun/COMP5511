@@ -99,7 +99,7 @@ public class Entry implements Record {
     return (match(pattern, this.name) || match(pattern, this.email) || match(pattern, this.school));
   }
 
-  // Boyer-Moore Algorithm
+  // Question 1: search with Boyer-Moore Algorithm
   private boolean match(String pattern, String text) {
     if (text == null) {
       return false;

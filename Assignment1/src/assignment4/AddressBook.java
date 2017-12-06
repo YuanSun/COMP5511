@@ -8,9 +8,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class AddressBook {
   private ArrayList<Entry> addressBook = new ArrayList<>();
+  // Question 2: inverted indices for organizations and countries
+  private SortedMap<String, List<Entry>> orgIndex = new TreeMap<>();
+  private SortedMap<String, List<Entry>> countryIndex = new TreeMap<>();
+  private Set<String> orgStopWords = new HashSet<>();
+  private Set<String> countryStopWords = new HashSet<>();
 
   public AddressBook() throws FileNotFoundException {
     URL url = getClass().getResource("ds17s-Asg4-data.txt");
@@ -40,6 +50,8 @@ public class AddressBook {
                 .setEmail(rawData[1] != null ? rawData[1] : "")
                 .setSchool(rawData[2] != null ? rawData[2] : "").build();
             addressBook.add(entry3Para);
+            // add school to stop words of organization
+            orgStopWords.add(rawData[2] != null ? rawData[2] : "");
             break;
 
           case 4:
@@ -48,6 +60,9 @@ public class AddressBook {
                 .setSchool(rawData[2] != null ? rawData[2] : "")
                 .setCountry(rawData[3] != null ? rawData[3] : "").build();
             addressBook.add(entry4Para);
+         // add school to stop words of organization and country
+            orgStopWords.add(rawData[2] != null ? rawData[2] : "");
+            countryStopWords.add(rawData[3] != null ? rawData[3] : "");
             break;
 
           default:
@@ -70,7 +85,7 @@ public class AddressBook {
     return this.addressBook.size();
   }
 
-  public ArrayList<Entry> search(String pattern) {
+  public ArrayList<Entry> searchWithPattern(String pattern) {
     ArrayList<Entry> result = new ArrayList<>();
     this.addressBook.forEach(entry -> {
       if (entry.match(pattern)) {
@@ -79,6 +94,14 @@ public class AddressBook {
     });
     displaySearchResult(result);
     return result;
+  }
+  
+  public void createOrgIndex() {
+    if (addressBook.isEmpty()) {
+      return;
+    }
+    
+    
   }
 
   private void displaySearchResult(ArrayList<Entry> result) {
@@ -125,4 +148,5 @@ public class AddressBook {
     }
 
   }
+ 
 }
