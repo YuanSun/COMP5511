@@ -11,7 +11,7 @@ public class main {
     // ArrayList<Entry> queryResult = addressBook.searchWithPattern("anca");
     addressBook.createOrgIndex();
 
-    addressBook.searchWithOrgIndex("Abran, Alain");
+    addressBook.searchWithOrgIndex("King");
 
   }
 

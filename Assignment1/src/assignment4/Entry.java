@@ -1,15 +1,11 @@
 package assignment4;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 public class Entry implements Record {
   private String name;
   private String email;
-  private String school;
+  private String organization;
   private String country;
 
   public String getName() {
@@ -20,8 +16,8 @@ public class Entry implements Record {
     return this.email;
   }
 
-  public String getSchool() {
-    return this.school;
+  public String getOrganization() {
+    return this.organization;
   }
 
   public String getCountry() {
@@ -36,14 +32,14 @@ public class Entry implements Record {
   @Override
   public void displayRecord() {
     System.out.printf("|%1$-40s | %2$-40s | %3$-75s | %4$-20s |",
-        this.name, this.email, this.school, this.country);
+        this.name, this.email, this.organization, this.country);
 
   }
 
   private Entry(EntryBuilder builder) {
     this.name = builder.name;
     this.email = builder.email;
-    this.school = builder.school;
+    this.organization = builder.organization;
     this.country = builder.country;
   }
 
@@ -54,7 +50,7 @@ public class Entry implements Record {
 
     // Optional parts
     private String email;
-    private String school;
+    private String organization;
     private String country;
 
     public EntryBuilder(String name) {
@@ -79,8 +75,8 @@ public class Entry implements Record {
       }
     }
 
-    public EntryBuilder setSchool(String school) {
-      this.school = school;
+    public EntryBuilder setOrganization(String organization) {
+      this.organization = organization;
       return this;
     }
 
@@ -96,55 +92,7 @@ public class Entry implements Record {
 
   public boolean match(String pattern) {
     // need to match name, email, organization as per assignment requirement
-    return (match(pattern, this.name) || match(pattern, this.email) || match(pattern, this.school));
-  }
-
-  // Question 1: search with Boyer-Moore Algorithm
-  /*
-   * Enhacement needed: input pattern and addressbook entry need to be all in lower case before processing
-   */
-  private boolean match(String pattern, String text) {
-    if (text == null) {
-      return false;
-    }
-    List<Integer> matches = new ArrayList<Integer>();
-    int m = text.length();
-    int n = pattern.length();
-    Map<Character, Integer> rightMostIndexes = preprocessForBadCharacterShift(pattern);
-    int alignedAt = 0;
-    while (alignedAt + (n - 1) < m) {
-      for (int indexInPattern = n - 1; indexInPattern >= 0; indexInPattern--) {
-        int indexInText = alignedAt + indexInPattern;
-        char x = text.charAt(indexInText);
-        char y = pattern.charAt(indexInPattern);
-        if (indexInText >= m)
-          break;
-        if (x != y) {
-          Integer r = rightMostIndexes.get(x);
-          if (r == null) {
-            alignedAt = indexInText + 1;
-          } else {
-            int shift = indexInText - (alignedAt + r);
-            alignedAt += shift > 0 ? shift : 1;
-          }
-          break;
-        } else if (indexInPattern == 0) {
-          matches.add(alignedAt);
-          alignedAt++;
-        }
-      }
-    }
-    return !matches.isEmpty();
-  }
-
-  private static Map<Character, Integer> preprocessForBadCharacterShift(
-      String pattern) {
-    Map<Character, Integer> map = new HashMap<Character, Integer>();
-    for (int i = pattern.length() - 1; i >= 0; i--) {
-      char c = pattern.charAt(i);
-      if (!map.containsKey(c))
-        map.put(c, i);
-    }
-    return map;
+    return (PatternUtil.match(pattern, this.name) || PatternUtil.match(pattern, this.email)
+        || PatternUtil.match(pattern, this.organization));
   }
 }

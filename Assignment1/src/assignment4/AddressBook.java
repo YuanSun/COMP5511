@@ -9,9 +9,11 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -21,6 +23,9 @@ public class AddressBook {
   // Question 2: inverted indices for organizations and countries
   private SortedMap<String, List<Tuple>> orgIndex = new TreeMap<>();
   private SortedMap<String, List<Tuple>> countryIndex = new TreeMap<>();
+  private Set<String> orgs = new HashSet<>();
+  private Set<String> countries = new HashSet<>();
+  private int count;
 
 
   public AddressBook() throws FileNotFoundException, UnsupportedEncodingException {
@@ -49,16 +54,19 @@ public class AddressBook {
           case 3:
             Entry entry3Para = new Entry.EntryBuilder(rawData[0] != null ? rawData[0] : "")
                 .setEmail(rawData[1] != null ? rawData[1] : "")
-                .setSchool(rawData[2] != null ? rawData[2] : "").build();
+                .setOrganization(rawData[2] != null ? rawData[2] : "").build();
             addressBook.add(entry3Para);
+            orgs.add(rawData[2]);
             break;
 
           case 4:
             Entry entry4Para = new Entry.EntryBuilder(rawData[0] != null ? rawData[0] : "")
                 .setEmail(rawData[1] != null ? rawData[1] : "")
-                .setSchool(rawData[2] != null ? rawData[2] : "")
+                .setOrganization(rawData[2] != null ? rawData[2] : "")
                 .setCountry(rawData[3] != null ? rawData[3] : "").build();
             addressBook.add(entry4Para);
+            orgs.add(rawData[2]);
+            countries.add(rawData[3]);
             break;
 
           default:
@@ -98,48 +106,64 @@ public class AddressBook {
     }
 
     addressBook.forEach(entry -> {
-      if (entry.getSchool() != null) {
-        List<Tuple> idx = orgIndex.get(entry.getSchool());
+      if (entry.getOrganization() != null) {
+        List<Tuple> idx = orgIndex.get(entry.getOrganization());
         if (idx == null) {
           idx = new LinkedList<Tuple>();
-          orgIndex.put(entry.getName(), idx);
+          orgIndex.put(entry.getOrganization(), idx);
         }
 
-        idx.add(new Tuple(entry.getSchool(), addressBook.indexOf(entry)));
+        idx.add(new Tuple(entry.getOrganization(), addressBook.indexOf(entry)));
       }
     });
 
 
-    System.out.println("Organization is indexed");
+    System.out.println("Organization is indexed!\n");
   }
 
-  public void searchWithOrgIndex(String name) {
+  public void searchWithOrgIndex(String org) {
+    count = 0;
     if (orgIndex.isEmpty()) {
       System.out.println("Data haven't been indexed. Run createOrgIndex() first!!!");
       return;
     }
 
-    // enhancement needed:
-    /*
-     * name could be input partially may need pattern matching for enhancement
-     */
-
-    Set<Entry> result = new HashSet<Entry>();
-
-    List<Tuple> idx = orgIndex.get(name);
-    if (idx != null) {
-      for (Tuple t : idx) {
-        result.add(addressBook.get(t.position));
+    // pattern match before search
+    // define how many orgs are match the search key
+    ArrayList<String> orgsToSearch = new ArrayList<>();
+    orgs.forEach(_org -> {
+      if (PatternUtil.match(org, _org)) {
+        orgsToSearch.add(_org);
       }
-    }
+    });
 
+    Map<String, List<Entry>> result = new HashMap<>();
+    if (!orgsToSearch.isEmpty()) {
+      orgsToSearch.forEach(orgToSearch -> {
+        List<Tuple> idx = orgIndex.get(orgToSearch);
+        if (idx != null) {
+          List<Entry> searchResult = new LinkedList<>();
+          for (Tuple t : idx) {
+            searchResult.add(addressBook.get(t.position));
+          }
+          result.put(orgToSearch, searchResult);
+        }
+      });
+
+    }
     if (!result.isEmpty()) {
-      System.out.println(name + ":");
-      result.forEach(entry -> {
-        System.out.print(" ");
-        entry.displayRecord();
+
+      System.out.println(org + " search result: \n");
+      result.forEach((orgMatch, entries) -> {
+        System.out.println(orgMatch + ":");
+        entries.forEach(e -> {
+          count++;
+          e.displayRecord();
+          System.out.println();
+        });
         System.out.println();
       });
+      System.out.println("Found " + count + " results.\n");
     } else {
       System.out.println("Nothing found!");
     }
@@ -147,7 +171,7 @@ public class AddressBook {
 
   private void displaySearchResult(ArrayList<Entry> result) {
     System.out.printf("|%1$-40s | %2$-40s | %3$-75s | %4$-20s |\n",
-        "Name", "Email Address", "School", "Country");
+        "Name", "Email Address", "Organization", "Country");
     System.out.printf("|%1$-40s | %2$-40s | %3$-75s | %4$-20s |\n",
         "----------------------------------------", "----------------------------------------",
         "---------------------------------------------------------------------------",
@@ -160,7 +184,7 @@ public class AddressBook {
 
   public void displayAddressBook(int... index) {
     System.out.printf("|%1$-40s | %2$-40s | %3$-75s | %4$-20s |\n",
-        "Name", "Email Address", "School", "Country");
+        "Name", "Email Address", "Organization", "Country");
     System.out.printf("|%1$-40s | %2$-40s | %3$-75s | %4$-20s |\n",
         "----------------------------------------", "----------------------------------------",
         "---------------------------------------------------------------------------",
