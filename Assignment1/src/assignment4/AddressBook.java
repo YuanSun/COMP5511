@@ -100,25 +100,38 @@ public class AddressBook {
     return result;
   }
 
-  public void createOrgIndex() {
+  public void createIndex(IndexType indexType) {
+    if (indexType.equals(IndexType.ORGANIZATION)) {
+      createIndex(IndexType.ORGANIZATION, orgIndex);
+    } else if (indexType.equals(IndexType.COUNTRY)) {
+      createIndex(IndexType.COUNTRY, countryIndex);
+    } else {
+      System.out.println("Index type is not valid!!!");
+    }
+
+
+  }
+
+  private void createIndex(IndexType indexType, SortedMap<String, List<Tuple>> index) {
     if (addressBook.isEmpty()) {
       return;
     }
 
-    addressBook.forEach(entry -> {
-      if (entry.getOrganization() != null) {
-        List<Tuple> idx = orgIndex.get(entry.getOrganization());
-        if (idx == null) {
-          idx = new LinkedList<Tuple>();
-          orgIndex.put(entry.getOrganization(), idx);
+
+    if (indexType.equals(IndexType.ORGANIZATION)) {
+      addressBook.forEach(entry -> {
+        if (entry.getOrganization() != null) {
+          List<Tuple> idx = index.get(entry.getOrganization());
+          if (idx == null) {
+            idx = new LinkedList<Tuple>();
+            index.put(entry.getOrganization(), idx);
+          }
+
+          idx.add(new Tuple(entry.getOrganization(), addressBook.indexOf(entry)));
         }
-
-        idx.add(new Tuple(entry.getOrganization(), addressBook.indexOf(entry)));
-      }
-    });
-
-
-    System.out.println("Organization is indexed!\n");
+      });
+      System.out.println("Organization is indexed!\n");
+    }
   }
 
   public void searchWithOrgIndex(String org) {

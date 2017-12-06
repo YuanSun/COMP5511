@@ -1,8 +1,9 @@
 package assignment4;
 
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
-public class Entry implements Record {
+public class Entry implements Record, Consumer {
   private String name;
   private String email;
   private String organization;
@@ -95,4 +96,7 @@ public class Entry implements Record {
     return (PatternUtil.match(pattern, this.name) || PatternUtil.match(pattern, this.email)
         || PatternUtil.match(pattern, this.organization));
   }
+
+  @Override
+  public void accept(Object t) {}
 }
