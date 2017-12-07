@@ -108,67 +108,86 @@ public class AddressBook {
     } else {
       System.out.println("Index type is not valid!!!");
     }
-
-
   }
 
   private void createIndex(IndexType indexType, SortedMap<String, List<Tuple>> index) {
     if (addressBook.isEmpty()) {
       return;
     }
-
-
-    if (indexType.equals(IndexType.ORGANIZATION)) {
-      addressBook.forEach(entry -> {
-        if (entry.getOrganization() != null) {
-          List<Tuple> idx = index.get(entry.getOrganization());
-          if (idx == null) {
-            idx = new LinkedList<Tuple>();
-            index.put(entry.getOrganization(), idx);
-          }
-
-          idx.add(new Tuple(entry.getOrganization(), addressBook.indexOf(entry)));
+    
+    addressBook.forEach(entry -> {
+      if (indexType.equals(IndexType.ORGANIZATION) && entry.getOrganization() != null) {
+        List<Tuple> idx = index.get(entry.getOrganization());
+        if (idx == null) {
+          idx = new LinkedList<Tuple>();
+          index.put(entry.getOrganization(), idx);
         }
-      });
-      System.out.println("Organization is indexed!\n");
-    }
+        idx.add(new Tuple(entry.getOrganization(), addressBook.indexOf(entry)));
+      } else if(indexType.equals(IndexType.COUNTRY) && entry.getCountry() != null) {
+        List<Tuple> idx = index.get(entry.getCountry());
+        if (idx == null) {
+          idx = new LinkedList<Tuple>();
+          index.put(entry.getCountry(), idx);
+        }
+        idx.add(new Tuple(entry.getCountry(), addressBook.indexOf(entry)));
+      }
+    });
+    System.out.println(indexType.toString() + " is indexed!\n");
   }
 
-  public void searchWithOrgIndex(String org) {
+  private void createIndexMsg() {
+    System.out.println("Data haven't been indexed. Create index first!!!");
+  }
+  
+  public void searchWithIndex(IndexType indexType, String key) {
     count = 0;
-    if (orgIndex.isEmpty()) {
-      System.out.println("Data haven't been indexed. Run createOrgIndex() first!!!");
+    
+    if ((indexType.equals(IndexType.ORGANIZATION) && orgIndex.isEmpty())
+        || (indexType.equals(IndexType.COUNTRY) && countryIndex.isEmpty())){
+      createIndexMsg();
       return;
     }
 
+    if(indexType.equals(IndexType.ORGANIZATION)) {
+      searchByKeys(orgs, orgIndex, key);
+    } 
+    
+    if(indexType.equals(IndexType.COUNTRY)) {
+      searchByKeys(countries, countryIndex, key);
+    }
+    
+    
+  }
+
+  private void searchByKeys(Set<String> keySet, SortedMap<String, List<Tuple>> index, String key) {
     // pattern match before search
     // define how many orgs are match the search key
-    ArrayList<String> orgsToSearch = new ArrayList<>();
-    orgs.forEach(_org -> {
-      if (PatternUtil.match(org, _org)) {
-        orgsToSearch.add(_org);
+    ArrayList<String> keysToSearch = new ArrayList<>();
+    keySet.forEach(_key -> {
+      if (PatternUtil.match(key, _key)) {
+        keysToSearch.add(_key);
       }
     });
 
     Map<String, List<Entry>> result = new HashMap<>();
-    if (!orgsToSearch.isEmpty()) {
-      orgsToSearch.forEach(orgToSearch -> {
-        List<Tuple> idx = orgIndex.get(orgToSearch);
+    if (!keysToSearch.isEmpty()) {
+      keysToSearch.forEach(keyToSearch -> {
+        List<Tuple> idx = index.get(keyToSearch);
         if (idx != null) {
           List<Entry> searchResult = new LinkedList<>();
           for (Tuple t : idx) {
             searchResult.add(addressBook.get(t.position));
           }
-          result.put(orgToSearch, searchResult);
+          result.put(keyToSearch, searchResult);
         }
       });
 
     }
     if (!result.isEmpty()) {
 
-      System.out.println(org + " search result: \n");
-      result.forEach((orgMatch, entries) -> {
-        System.out.println(orgMatch + ":");
+      System.out.println(key + " search result: \n");
+      result.forEach((keyMatch, entries) -> {
+        System.out.println(keyMatch + ":");
         entries.forEach(e -> {
           count++;
           e.displayRecord();
@@ -180,6 +199,7 @@ public class AddressBook {
     } else {
       System.out.println("Nothing found!");
     }
+    
   }
 
   private void displaySearchResult(ArrayList<Entry> result) {
