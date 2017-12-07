@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 
-public interface Ass3Q5 {
+public interface Ass3Q7 {
   default public ArrayList<String> getData() throws IOException{
     URL url = getClass().getResource("ds17s-asg2-data.txt");
     File file = new File(url.getFile());
