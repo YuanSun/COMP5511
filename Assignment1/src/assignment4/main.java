@@ -9,11 +9,12 @@ public class main {
   public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
     AddressBook addressBook = new AddressBook();
 
+    
     ArrayList<Entry> queryResult = addressBook.searchWithPattern("anca");
    
 
     addressBook.createIndex(IndexType.COUNTRY);
-    addressBook.searchWithIndex(IndexType.COUNTRY, "China");
+    addressBook.searchWithIndex(IndexType.COUNTRY, "CA");
 
   }
 

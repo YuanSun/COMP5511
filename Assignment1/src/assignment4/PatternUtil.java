@@ -10,10 +10,13 @@ public class PatternUtil {
   /*
    * Enhacement needed: input pattern and addressbook entry need to be all in lower case before processing
    */
-  public static boolean match(String pattern, String text) {
-    if (text == null) {
+  public static boolean match(String _pattern, String _text) {
+    if (_text == null) {
       return false;
     }
+    // pattern util will ignore case
+    String text = _text.trim().toLowerCase();
+    String pattern = _pattern.trim().toLowerCase();
     List<Integer> matches = new ArrayList<Integer>();
     int m = text.length();
     int n = pattern.length();
