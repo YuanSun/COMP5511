@@ -114,7 +114,7 @@ public class AddressBook {
     if (addressBook.isEmpty()) {
       return;
     }
-    
+
     addressBook.forEach(entry -> {
       if (indexType.equals(IndexType.ORGANIZATION) && entry.getOrganization() != null) {
         List<Tuple> idx = index.get(entry.getOrganization());
@@ -123,7 +123,7 @@ public class AddressBook {
           index.put(entry.getOrganization(), idx);
         }
         idx.add(new Tuple(entry.getOrganization(), addressBook.indexOf(entry)));
-      } else if(indexType.equals(IndexType.COUNTRY) && entry.getCountry() != null) {
+      } else if (indexType.equals(IndexType.COUNTRY) && entry.getCountry() != null) {
         List<Tuple> idx = index.get(entry.getCountry());
         if (idx == null) {
           idx = new LinkedList<Tuple>();
@@ -132,31 +132,31 @@ public class AddressBook {
         idx.add(new Tuple(entry.getCountry(), addressBook.indexOf(entry)));
       }
     });
-    System.out.println(indexType.toString() + " is indexed!\n");
+    System.out.println("\n" + indexType.toString() + " is indexed!\n");
   }
 
   private void createIndexMsg() {
-    System.out.println("Data haven't been indexed. Create index first!!!");
+    System.out.println("\nData haven't been indexed. Create index first!!!");
   }
-  
+
   public void searchWithIndex(IndexType indexType, String key) {
     count = 0;
-    
+
     if ((indexType.equals(IndexType.ORGANIZATION) && orgIndex.isEmpty())
-        || (indexType.equals(IndexType.COUNTRY) && countryIndex.isEmpty())){
+        || (indexType.equals(IndexType.COUNTRY) && countryIndex.isEmpty())) {
       createIndexMsg();
       return;
     }
 
-    if(indexType.equals(IndexType.ORGANIZATION)) {
+    if (indexType.equals(IndexType.ORGANIZATION)) {
       searchByKeys(orgs, orgIndex, key);
-    } 
-    
-    if(indexType.equals(IndexType.COUNTRY)) {
+    }
+
+    if (indexType.equals(IndexType.COUNTRY)) {
       searchByKeys(countries, countryIndex, key);
     }
-    
-    
+
+
   }
 
   private void searchByKeys(Set<String> keySet, SortedMap<String, List<Tuple>> index, String key) {
@@ -199,7 +199,7 @@ public class AddressBook {
     } else {
       System.out.println("Nothing found!");
     }
-    
+
   }
 
   private void displaySearchResult(ArrayList<Entry> result) {
