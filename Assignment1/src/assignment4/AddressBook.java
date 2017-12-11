@@ -98,8 +98,8 @@ public class AddressBook {
     });
     displaySearchResult(result);
     return result;
-  }  
-  
+  }
+
   public void createIndex(IndexType indexType) {
     if (indexType.equals(IndexType.ORGANIZATION)) {
       createIndex(IndexType.ORGANIZATION, orgIndex);
@@ -116,7 +116,6 @@ public class AddressBook {
     }
 
     addressBook.forEach(entry -> {
-        //System.out.println(entry.getCountry());
       if (indexType.equals(IndexType.ORGANIZATION) && entry.getOrganization() != null) {
         List<Tuple> idx = index.get(entry.getOrganization());
         if (idx == null) {
@@ -124,7 +123,6 @@ public class AddressBook {
           index.put(entry.getOrganization(), idx);
         }
         idx.add(new Tuple(entry.getOrganization(), addressBook.indexOf(entry)));
-        
       } else if (indexType.equals(IndexType.COUNTRY) && entry.getCountry() != null) {
         List<Tuple> idx = index.get(entry.getCountry());
         if (idx == null) {
@@ -141,7 +139,7 @@ public class AddressBook {
     System.out.println("\nData haven't been indexed. Create index first!!!");
   }
 
-  public void searchWithIndex(IndexType indexType, List<String> countryList, String query) {
+  public void searchWithIndex(IndexType indexType, String key) {
     count = 0;
 
     if ((indexType.equals(IndexType.ORGANIZATION) && orgIndex.isEmpty())
@@ -149,29 +147,28 @@ public class AddressBook {
       createIndexMsg();
       return;
     }
-    /*
+
     if (indexType.equals(IndexType.ORGANIZATION)) {
       searchByKeys(orgs, orgIndex, key);
     }
-    */
-    
+
     if (indexType.equals(IndexType.COUNTRY)) {
-      searchByKeys(countries, countryIndex, countryList, query);
+      searchByKeys(countries, countryIndex, key);
     }
-   
+
+
   }
 
-  private void searchByKeys(Set<String> keySet, SortedMap<String, List<Tuple>> index, List<String> countryList, String query) {
+  private void searchByKeys(Set<String> keySet, SortedMap<String, List<Tuple>> index, String key) {
     // pattern match before search
     // define how many orgs are match the search key
     ArrayList<String> keysToSearch = new ArrayList<>();
     keySet.forEach(_key -> {
-        for(int i = 0; i <= countryList.size()-1; i++){
-            if (PatternUtil.match(countryList.get(i), _key)) {
-                keysToSearch.add(_key);
-              }
-        }
+      if (PatternUtil.match(key, _key)) {
+        keysToSearch.add(_key);
+      }
     });
+
     Map<String, List<Entry>> result = new HashMap<>();
     if (!keysToSearch.isEmpty()) {
       keysToSearch.forEach(keyToSearch -> {
@@ -179,11 +176,8 @@ public class AddressBook {
         if (idx != null) {
           List<Entry> searchResult = new LinkedList<>();
           for (Tuple t : idx) {
-              if (PatternUtil.match(query, addressBook.get(t.position).getOrganization())){
-                  searchResult.add(addressBook.get(t.position));
-              }
+            searchResult.add(addressBook.get(t.position));
           }
-
           result.put(keyToSearch, searchResult);
         }
       });
@@ -191,7 +185,7 @@ public class AddressBook {
     }
     if (!result.isEmpty()) {
 
-      System.out.println(countryList + " search result: \n");
+      System.out.println(key + " search result: \n");
       result.forEach((keyMatch, entries) -> {
         System.out.println(keyMatch + ":");
         entries.forEach(e -> {
