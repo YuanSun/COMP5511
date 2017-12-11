@@ -108,7 +108,7 @@ public class BPlusTree<Key extends Comparable<? super Key>, Value> {
     public Split insert(Key key, Value value) {
       // Simple linear search
       int i = getLoc(key);
-      if (this.num == M) { // The node was full. We must split it
+      if (this.num == M || this.num > Math.ceil(0.6*this.keys.length)) { // The node was 60% full. We must split it
         int mid = (M + 1) / 2;
         int sNum = this.num - mid;
         LNode sibling = new LNode();
