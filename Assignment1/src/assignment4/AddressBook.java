@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -100,7 +101,15 @@ public class AddressBook {
     return result;
   }
 
-  public void createIndex(IndexType indexType) {
+  public void createIndex() {
+    // create index for org
+    createIndex(IndexType.ORGANIZATION);
+    
+    // create index for country
+    createIndex(IndexType.COUNTRY);
+  }
+  
+  private void createIndex(IndexType indexType) {
     if (indexType.equals(IndexType.ORGANIZATION)) {
       createIndex(IndexType.ORGANIZATION, orgIndex);
     } else if (indexType.equals(IndexType.COUNTRY)) {
@@ -139,27 +148,61 @@ public class AddressBook {
     System.out.println("\nData haven't been indexed. Create index first!!!");
   }
 
-  public void searchWithIndex(IndexType indexType, String key) {
+  // first parameter is organization, second is country
+  public void searchWithIndex(String org, String country) {
+    int searchCount = 0;
+    Map<String, List<Entry>> orgResult = new HashMap<>();
+    Map<String, List<Entry>> countryResult = new HashMap<>();
+    orgResult = searchWithIndex(IndexType.ORGANIZATION, org);
+    searchCount = count;
+    countryResult = searchWithIndex(IndexType.COUNTRY, country);
+    searchCount += count;
+    
+    Collection<List<Entry>> result;
+    result = orgResult.values();
+    result.retainAll(countryResult.values());
+   
+    
+    if (!result.isEmpty()) {
+
+      System.out.println(org + "--" + country + " search result: \n");
+      result.forEach((keyMatch, entries) -> {
+        System.out.println(keyMatch + ":");
+        entries.forEach(e -> {
+          count++;
+          e.displayRecord();
+          System.out.println();
+        });
+        System.out.println();
+      });
+      System.out.println("Found " + count + " results.\n");
+    } else {
+      System.out.println("Nothing found!");
+    }
+  }
+  
+  private Map<String, List<Entry>> searchWithIndex(IndexType indexType, String key) {
     count = 0;
+    Map<String, List<Entry>> result = new HashMap<>();
 
     if ((indexType.equals(IndexType.ORGANIZATION) && orgIndex.isEmpty())
         || (indexType.equals(IndexType.COUNTRY) && countryIndex.isEmpty())) {
       createIndexMsg();
-      return;
+      return null;
     }
 
     if (indexType.equals(IndexType.ORGANIZATION)) {
-      searchByKeys(orgs, orgIndex, key);
+      result = searchByKeys(orgs, orgIndex, key);
     }
 
     if (indexType.equals(IndexType.COUNTRY)) {
-      searchByKeys(countries, countryIndex, key);
+      result = searchByKeys(countries, countryIndex, key);
     }
-
+    return result;
 
   }
 
-  private void searchByKeys(Set<String> keySet, SortedMap<String, List<Tuple>> index, String key) {
+  private Map<String, List<Entry>> searchByKeys(Set<String> keySet, SortedMap<String, List<Tuple>> index, String key) {
     // pattern match before search
     // define how many orgs are match the search key
     ArrayList<String> keysToSearch = new ArrayList<>();
@@ -183,23 +226,8 @@ public class AddressBook {
       });
 
     }
-    if (!result.isEmpty()) {
-
-      System.out.println(key + " search result: \n");
-      result.forEach((keyMatch, entries) -> {
-        System.out.println(keyMatch + ":");
-        entries.forEach(e -> {
-          count++;
-          e.displayRecord();
-          System.out.println();
-        });
-        System.out.println();
-      });
-      System.out.println("Found " + count + " results.\n");
-    } else {
-      System.out.println("Nothing found!");
-    }
-
+    
+    return result;
   }
 
   private void displaySearchResult(ArrayList<Entry> result) {

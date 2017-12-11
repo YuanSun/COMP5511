@@ -12,8 +12,8 @@ public class main {
     ArrayList<Entry> queryResult = addressBook.searchWithPattern("anca");
 
 
-    addressBook.createIndex(IndexType.COUNTRY);
-    addressBook.searchWithIndex(IndexType.COUNTRY, "CA");
+    addressBook.createIndex();
+    addressBook.searchWithIndex("Technology", "Canada");
 
     BPlusTreeSearch treeSearch = new BPlusTreeSearch();
     treeSearch.displayResult();
