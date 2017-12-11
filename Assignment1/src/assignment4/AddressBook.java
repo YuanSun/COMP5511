@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -99,17 +98,9 @@ public class AddressBook {
     });
     displaySearchResult(result);
     return result;
-  }
-
-  public void createIndex() {
-    // create index for org
-    createIndex(IndexType.ORGANIZATION);
-    
-    // create index for country
-    createIndex(IndexType.COUNTRY);
-  }
+  }  
   
-  private void createIndex(IndexType indexType) {
+  public void createIndex(IndexType indexType) {
     if (indexType.equals(IndexType.ORGANIZATION)) {
       createIndex(IndexType.ORGANIZATION, orgIndex);
     } else if (indexType.equals(IndexType.COUNTRY)) {
@@ -125,6 +116,7 @@ public class AddressBook {
     }
 
     addressBook.forEach(entry -> {
+        //System.out.println(entry.getCountry());
       if (indexType.equals(IndexType.ORGANIZATION) && entry.getOrganization() != null) {
         List<Tuple> idx = index.get(entry.getOrganization());
         if (idx == null) {
@@ -132,6 +124,7 @@ public class AddressBook {
           index.put(entry.getOrganization(), idx);
         }
         idx.add(new Tuple(entry.getOrganization(), addressBook.indexOf(entry)));
+        
       } else if (indexType.equals(IndexType.COUNTRY) && entry.getCountry() != null) {
         List<Tuple> idx = index.get(entry.getCountry());
         if (idx == null) {
@@ -148,24 +141,57 @@ public class AddressBook {
     System.out.println("\nData haven't been indexed. Create index first!!!");
   }
 
-  // first parameter is organization, second is country
-  public void searchWithIndex(String org, String country) {
-    int searchCount = 0;
-    Map<String, List<Entry>> orgResult = new HashMap<>();
-    Map<String, List<Entry>> countryResult = new HashMap<>();
-    orgResult = searchWithIndex(IndexType.ORGANIZATION, org);
-    searchCount = count;
-    countryResult = searchWithIndex(IndexType.COUNTRY, country);
-    searchCount += count;
+  public void searchWithIndex(IndexType indexType, List<String> countryList, String query) {
+    count = 0;
+
+    if ((indexType.equals(IndexType.ORGANIZATION) && orgIndex.isEmpty())
+        || (indexType.equals(IndexType.COUNTRY) && countryIndex.isEmpty())) {
+      createIndexMsg();
+      return;
+    }
+    /*
+    if (indexType.equals(IndexType.ORGANIZATION)) {
+      searchByKeys(orgs, orgIndex, key);
+    }
+    */
     
-    Collection<List<Entry>> result;
-    result = orgResult.values();
-    result.retainAll(countryResult.values());
+    if (indexType.equals(IndexType.COUNTRY)) {
+      searchByKeys(countries, countryIndex, countryList, query);
+    }
    
-    
+  }
+
+  private void searchByKeys(Set<String> keySet, SortedMap<String, List<Tuple>> index, List<String> countryList, String query) {
+    // pattern match before search
+    // define how many orgs are match the search key
+    ArrayList<String> keysToSearch = new ArrayList<>();
+    keySet.forEach(_key -> {
+        for(int i = 0; i <= countryList.size()-1; i++){
+            if (PatternUtil.match(countryList.get(i), _key)) {
+                keysToSearch.add(_key);
+              }
+        }
+    });
+    Map<String, List<Entry>> result = new HashMap<>();
+    if (!keysToSearch.isEmpty()) {
+      keysToSearch.forEach(keyToSearch -> {
+        List<Tuple> idx = index.get(keyToSearch);
+        if (idx != null) {
+          List<Entry> searchResult = new LinkedList<>();
+          for (Tuple t : idx) {
+              if (PatternUtil.match(query, addressBook.get(t.position).getOrganization())){
+                  searchResult.add(addressBook.get(t.position));
+              }
+          }
+
+          result.put(keyToSearch, searchResult);
+        }
+      });
+
+    }
     if (!result.isEmpty()) {
 
-      System.out.println(org + "--" + country + " search result: \n");
+      System.out.println(countryList + " search result: \n");
       result.forEach((keyMatch, entries) -> {
         System.out.println(keyMatch + ":");
         entries.forEach(e -> {
@@ -179,55 +205,7 @@ public class AddressBook {
     } else {
       System.out.println("Nothing found!");
     }
-  }
-  
-  private Map<String, List<Entry>> searchWithIndex(IndexType indexType, String key) {
-    count = 0;
-    Map<String, List<Entry>> result = new HashMap<>();
 
-    if ((indexType.equals(IndexType.ORGANIZATION) && orgIndex.isEmpty())
-        || (indexType.equals(IndexType.COUNTRY) && countryIndex.isEmpty())) {
-      createIndexMsg();
-      return null;
-    }
-
-    if (indexType.equals(IndexType.ORGANIZATION)) {
-      result = searchByKeys(orgs, orgIndex, key);
-    }
-
-    if (indexType.equals(IndexType.COUNTRY)) {
-      result = searchByKeys(countries, countryIndex, key);
-    }
-    return result;
-
-  }
-
-  private Map<String, List<Entry>> searchByKeys(Set<String> keySet, SortedMap<String, List<Tuple>> index, String key) {
-    // pattern match before search
-    // define how many orgs are match the search key
-    ArrayList<String> keysToSearch = new ArrayList<>();
-    keySet.forEach(_key -> {
-      if (PatternUtil.match(key, _key)) {
-        keysToSearch.add(_key);
-      }
-    });
-
-    Map<String, List<Entry>> result = new HashMap<>();
-    if (!keysToSearch.isEmpty()) {
-      keysToSearch.forEach(keyToSearch -> {
-        List<Tuple> idx = index.get(keyToSearch);
-        if (idx != null) {
-          List<Entry> searchResult = new LinkedList<>();
-          for (Tuple t : idx) {
-            searchResult.add(addressBook.get(t.position));
-          }
-          result.put(keyToSearch, searchResult);
-        }
-      });
-
-    }
-    
-    return result;
   }
 
   private void displaySearchResult(ArrayList<Entry> result) {
