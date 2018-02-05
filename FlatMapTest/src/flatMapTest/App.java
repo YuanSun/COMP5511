@@ -1,4 +1,4 @@
-package FlatMap.flatMap;
+package flatMapTest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
