@@ -6,7 +6,7 @@ public class Client {
 
 	public static void main(String [] args){
 		
-         BillingSystem billingSystem = new BillingSystem();
+        BillingSystem billingSystem = new BillingSystem();
         InvoiceCustomerSystem invoiceCustomerSystem = new InvoiceCustomerSystem();
 
 
