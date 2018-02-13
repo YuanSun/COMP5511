@@ -1,4 +1,4 @@
-package structural.adapter.improved;
+package adapter.improved;
 
 public class Rectangle {
 
