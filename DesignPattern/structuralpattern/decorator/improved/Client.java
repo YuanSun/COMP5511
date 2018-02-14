@@ -1,4 +1,4 @@
-package structural.decorator.improved;
+package decorator.improved;
 
 public class Client {
 

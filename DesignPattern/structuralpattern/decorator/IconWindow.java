@@ -1,4 +1,4 @@
-package structural.decorator;
+package decorator;
 
 
 public class IconWindow extends Window{
