@@ -1,4 +1,4 @@
-package structural.bridge.improved;
+package bridge.improved;
 
 
 public abstract class WindowImpl {

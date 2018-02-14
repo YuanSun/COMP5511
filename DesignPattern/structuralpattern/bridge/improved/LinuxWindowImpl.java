@@ -1,4 +1,4 @@
-package structural.bridge.improved;
+package bridge.improved;
 
 
 public class LinuxWindowImpl extends WindowImpl{

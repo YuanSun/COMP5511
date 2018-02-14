@@ -1,4 +1,4 @@
-package structural.bridge;
+package bridge;
 
 /**
  * Created by sjdmulde on 03/09/15.

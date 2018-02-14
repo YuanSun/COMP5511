@@ -1,4 +1,4 @@
-package structural.bridge;
+package bridge;
 
 
 public class DirectXWindow implements Window {
