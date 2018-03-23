@@ -21,6 +21,7 @@ public class Runner {
     System.out.println("Waken up");
     try {
       increment();
+      System.out.println("Here is in the first thread.");
     } finally {
       lock.unlock();
     }
@@ -37,6 +38,7 @@ public class Runner {
     
     try {
       increment();
+      System.out.println("Here is in the second thread.");
     } finally {
       lock.unlock(); // hand over the control of the lock.
     }
