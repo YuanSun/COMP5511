@@ -2,6 +2,8 @@ package qFromS;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class Stack<E> {
@@ -28,20 +30,20 @@ public class Stack<E> {
   }
 
   public void pushAll(Iterable<? extends E> src) {
-    while (src.iterator().hasNext()) {
-      data.add(src.iterator().next());
+    Iterator<? extends E> itr = src.iterator();
+    while (itr.hasNext()) {
+      data.add(itr.next());
     }
   }
 
   public void popAll(Collection<? super E> dst) {
     while (!data.isEmpty()) {
-      dst.add(data.remove(0));
+      dst.add(data.remove(data.size() - 1));
     }
   }
 
   public Iterable<E> popAll() {
+    Collections.reverse(data);
     return data;
-
-
   }
 }
