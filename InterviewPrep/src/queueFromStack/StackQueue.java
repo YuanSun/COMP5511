@@ -1,4 +1,4 @@
-package qFromS;
+package queueFromStack;
 
 import java.util.Collection;
 
