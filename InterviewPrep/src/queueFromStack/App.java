@@ -9,7 +9,7 @@ public class App {
     List<Integer> theList = new ArrayList<>();
 
     int[] arr = {5, 6, 10, 34, 9, 2, -5, 1, 80};
-
+    int[] arr2 = {100, 99, 98, 97, 96};
     for (int n : arr) {
       theList.add(n);
     }
@@ -24,6 +24,21 @@ public class App {
     queue.addAll(theList);
     queue.add(90);
     queue.add(100);
+    
+    theList.removeAll(theList);
+    
+    for (int n: arr2) {
+      theList.add(n);
+    }
+    
+    StackQueue<Integer> anotherQ = new StackQueue<>();
+    anotherQ.addAll(theList);
+    
+    // Weave
+    
+    StackQueue<Integer> weavedQ = new StackQueue<>();
+    weavedQ = Weave.weave(queue, anotherQ);
+    
 
     // to see what is in the queue by removing all elements
     List<Integer> result = new ArrayList<>();
@@ -50,6 +65,16 @@ public class App {
       System.out.print(e + " ");
     });
 
+    System.out.println("\nThe weaved queue result is ");
+    
+    
+    result.removeAll(result);
+    weavedQ.removeAll(result);
+    
+    result.forEach(e -> {
+      System.out.print(e + " ");
+    });
+    
   }
 
 }
