@@ -2,7 +2,6 @@ package queueFromStack;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -43,7 +42,10 @@ public class Stack<E> {
   }
 
   public Iterable<E> popAll() {
-    Collections.reverse(data);
-    return data;
+    //Collections.reverse(data);
+    List<E> list = new ArrayList<>();
+    list.addAll(data);
+    data.clear();
+    return list;
   }
 }

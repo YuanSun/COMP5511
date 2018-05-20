@@ -22,8 +22,7 @@ public class App {
     System.out.println("\n");
     StackQueue<Integer> queue = new StackQueue<>();
     queue.addAll(theList);
-    queue.add(90);
-    queue.add(100);
+  
     
     theList.removeAll(theList);
     
@@ -65,7 +64,7 @@ public class App {
       System.out.print(e + " ");
     });
 
-    System.out.println("\nThe weaved queue result is ");
+    System.out.println("\n\nThe weaved queue result is ");
     
     
     result.removeAll(result);
