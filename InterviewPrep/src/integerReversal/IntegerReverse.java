@@ -14,11 +14,11 @@ public class IntegerReverse {
     
     String reversedStr = new StringBuilder(numStr).reverse().toString();
     
-    int reversedNum = new Integer(reversedStr);
+    Integer reversedNum = new Integer(reversedStr);
     if (num < 0) {
       reversedNum *= -1;
     }
     
-    return reversedNum;
+    return reversedNum.intValue();
   }
 }

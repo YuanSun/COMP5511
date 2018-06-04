@@ -5,6 +5,7 @@ public class App {
     int num1 = 500;
     int num2 = -90;
     int num3 = -15;
+    String num4 = "9646324351";
     
     System.out.println(IntegerReverse.reverse(num1));
     System.out.println(IntegerReverse.reverse(num2));
