@@ -9,8 +9,13 @@ import java.util.function.DoubleBinaryOperator;
  *
  */
 public enum Payroll {
-  MONDAY(PayType.WeekDay), TUESDAY(PayType.WeekDay), WENDSDAY(PayType.WeekDay), THURSDAY(PayType.WeekDay), FRIDAY(PayType.WeekDay), SATURDAY(PayType.WeekEnd), SUNDAY(
-      PayType.WeekEnd);
+  MONDAY(PayType.WeekDay), 
+  TUESDAY(PayType.WeekDay), 
+  WENDSDAY(PayType.WeekDay), 
+  THURSDAY(PayType.WeekDay), 
+  FRIDAY(PayType.WeekDay), 
+  SATURDAY(PayType.WeekEnd), 
+  SUNDAY(PayType.WeekEnd);
 
   private static final int FIXED_WORK_HOUR_PER_DAY = 8;
   private static final double OVER_TIME_PAY_RATE = 1 / 2;
