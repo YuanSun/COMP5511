@@ -6,6 +6,9 @@ public class App {
     String str = "Greetings!";
 
     System.out.println(StringReversal.reverse(str));
+    
+    System.out.println(StringReversal.reverseRecur(str));
+    
   }
 
 }

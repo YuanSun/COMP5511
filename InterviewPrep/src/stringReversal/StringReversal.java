@@ -12,4 +12,12 @@ public class StringReversal {
   static String reverse(String str) {
     return new StringBuilder(str).reverse().toString();
   }
+  
+  static String reverseRecur(String str) {
+    if (str == null || str.length() <= 1) {
+      return str;
+    }
+    
+    return reverseRecur(str.substring(1)) + str.charAt(0);
+  }
 }
