@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <interface id="1" language="java" name="creational.abstractfactory.improved.WidgetFactory" project="DesignPattern" 
+    file="/DesignPattern/creationalpattern/creational/abstractfactory/improved/WidgetFactory.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="101" width="169" x="1082" y="320"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="2" language="java" name="creational.abstractfactory.improved.YellowThemeWidgetFactory" 
+    project="DesignPattern" 
+    file="/DesignPattern/creationalpattern/creational/abstractfactory/improved/YellowThemeWidgetFactory.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="119" width="210" x="957" y="143"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="creational.abstractfactory.improved.Client" project="DesignPattern" 
+    file="/DesignPattern/creationalpattern/creational/abstractfactory/improved/Client.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="137" width="218" x="287" y="143"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="creational.abstractfactory.improved.PinkThemeWindow" project="DesignPattern" 
+    file="/DesignPattern/creationalpattern/creational/abstractfactory/improved/PinkThemeWindow.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="83" width="165" x="545" y="143"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="creational.abstractfactory.improved.YellowThemeWindow" project="DesignPattern" 
+    file="/DesignPattern/creationalpattern/creational/abstractfactory/improved/YellowThemeWindow.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="83" width="167" x="750" y="143"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="6" language="java" name="creational.abstractfactory.improved.ScrollBar" project="DesignPattern" 
+    file="/DesignPattern/creationalpattern/creational/abstractfactory/improved/ScrollBar.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="65" width="165" x="1550" y="320"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="7" language="java" name="creational.abstractfactory.improved.YellowThemeScrollbar" project="DesignPattern" 
+    file="/DesignPattern/creationalpattern/creational/abstractfactory/improved/YellowThemeScrollbar.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="83" width="174" x="1443" y="143"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="creational.abstractfactory.improved.PinkThemeScrollBar" project="DesignPattern" 
+    file="/DesignPattern/creationalpattern/creational/abstractfactory/improved/PinkThemeScrollBar.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="83" width="165" x="1657" y="143"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="creational.abstractfactory.improved.PinkThemeWidgetFactory" 
+    project="DesignPattern" 
+    file="/DesignPattern/creationalpattern/creational/abstractfactory/improved/PinkThemeWidgetFactory.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="119" width="196" x="1207" y="143"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="10" language="java" name="creational.abstractfactory.improved.Window" project="DesignPattern" 
+    file="/DesignPattern/creationalpattern/creational/abstractfactory/improved/Window.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="65" width="165" x="648" y="320"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <realization id="11">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <realization id="12">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <realization id="13">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <realization id="14">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <realization id="15">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <realization id="16">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

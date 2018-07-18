@@ -1,4 +1,4 @@
-package structural.composite;
+package composite;
 
 
 public class Line {

@@ -1,4 +1,4 @@
-package structural.flyweight.improved;
+package flyweight.improved;
 
 
 public class Client {

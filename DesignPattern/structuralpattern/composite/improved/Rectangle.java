@@ -1,4 +1,4 @@
-package structural.composite.improved;
+package composite.improved;
 
 
 public class Rectangle implements Graphic{

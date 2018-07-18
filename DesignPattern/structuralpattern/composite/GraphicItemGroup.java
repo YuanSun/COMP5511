@@ -1,4 +1,4 @@
-package structural.composite;
+package composite;
 
 
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ public class GraphicItemGroup {
 
     private List<Line> lines = new ArrayList<Line>();
 
-    private List<Rectangle> rectangles = new ArrayList<structural.composite.Rectangle>();
+    private List<Rectangle> rectangles = new ArrayList<Rectangle>();
 
     public List<Line> getLines() {
         return lines;

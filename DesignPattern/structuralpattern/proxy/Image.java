@@ -1,4 +1,4 @@
-package structural.proxy;
+package proxy;
 
 
 public class Image {

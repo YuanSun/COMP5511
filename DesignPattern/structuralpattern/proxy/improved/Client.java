@@ -1,4 +1,4 @@
-package structural.proxy.improved;
+package proxy.improved;
 
 
 

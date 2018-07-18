@@ -1,4 +1,4 @@
-package structural.proxy;
+package proxy;
 
 
 import java.util.ArrayList;

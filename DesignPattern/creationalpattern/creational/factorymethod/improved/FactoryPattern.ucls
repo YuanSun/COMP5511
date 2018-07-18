@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="creational.factorymethod.improved.Client" project="DesignPattern" 
+    file="/DesignPattern/creationalpattern/creational/factorymethod/improved/Client.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="101" width="164" x="136" y="287"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="creational.factorymethod.improved.Transport" project="DesignPattern" 
+    file="/DesignPattern/creationalpattern/creational/factorymethod/improved/Transport.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="101" width="164" x="340" y="287"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="creational.factorymethod.improved.CarFactory" project="DesignPattern" 
+    file="/DesignPattern/creationalpattern/creational/factorymethod/improved/CarFactory.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="101" width="164" x="544" y="428"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="creational.factorymethod.improved.BikeFactory" project="DesignPattern" 
+    file="/DesignPattern/creationalpattern/creational/factorymethod/improved/BikeFactory.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="101" width="164" x="748" y="428"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="creational.factorymethod.improved.TransportFactory" project="DesignPattern" 
+    file="/DesignPattern/creationalpattern/creational/factorymethod/improved/TransportFactory.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="101" width="164" x="646" y="287"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="creational.factorymethod.improved.Bike" project="DesignPattern" 
+    file="/DesignPattern/creationalpattern/creational/factorymethod/improved/Bike.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="101" width="164" x="136" y="428"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="creational.factorymethod.improved.Car" project="DesignPattern" 
+    file="/DesignPattern/creationalpattern/creational/factorymethod/improved/Car.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="101" width="164" x="340" y="428"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="8">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="9">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="10">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="11">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
