@@ -1,20 +1,20 @@
-package behavioral.observer.improved;
+package observer.improved;
 
 
 public class Client {
 
-    public static void main(String[] args) {
-        Button button = new Button();
-        InputText text = new InputText();
-        List list = new List();
+  public static void main(String[] args) {
+    Button button = new Button();
+    InputText text = new InputText();
+    List list = new List();
 
 
 
-        button.attachObserver(text);
-        button.attachObserver(list);
+    button.attachObserver(text);
+    button.attachObserver(list);
 
-        button.clicked();
+    button.clicked();
 
-    }
+  }
 
 }
