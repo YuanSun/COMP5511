@@ -1,4 +1,4 @@
-package behavioral.visitor.improved;
+package visitor.improved;
 
 
 public abstract class CarPart {

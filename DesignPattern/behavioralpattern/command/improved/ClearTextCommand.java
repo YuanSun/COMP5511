@@ -1,4 +1,4 @@
-package behavioral.command.improved;
+package command.improved;
 
 
 public class ClearTextCommand extends AbstractCommand{

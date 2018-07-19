@@ -1,7 +1,4 @@
-package behavioral.strategy.improved;
-
-
-import behavioral.strategy.Difficulty;
+package strategy.improved;
 
 public class Chess {
 

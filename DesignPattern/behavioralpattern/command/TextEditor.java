@@ -1,4 +1,4 @@
-package behavioral.command;
+package command;
 
 
 public class TextEditor {

@@ -1,4 +1,4 @@
-package behavioral.strategy;
+package strategy;
 
 
 public enum Difficulty {

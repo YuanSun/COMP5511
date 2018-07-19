@@ -1,4 +1,4 @@
-package behavioral.command.improved;
+package command.improved;
 
 
 import java.util.LinkedList;

@@ -1,4 +1,4 @@
-package behavioral.visitor.improved;
+package visitor.improved;
 
 
 import java.util.ArrayList;

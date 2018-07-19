@@ -1,4 +1,4 @@
-package behavioral.strategy.improved;
+package strategy.improved;
 
 
 public class HardChessAlgorithm implements ChessAlgorithm{
