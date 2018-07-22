@@ -1,8 +1,4 @@
-package behavioral.chainofresponsibility.improved;
-
-
-import java.util.ArrayList;
-import java.util.List;
+package chainofresponsibility.improved;
 
 public abstract class CheckoutHandler {
 

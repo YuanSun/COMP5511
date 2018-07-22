@@ -1,4 +1,4 @@
-package behavioral.state.improved;
+package state.improved;
 
 
 public interface TCPConnectionState {

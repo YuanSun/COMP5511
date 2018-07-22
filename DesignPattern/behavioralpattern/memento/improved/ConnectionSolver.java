@@ -1,4 +1,4 @@
-package behavioral.memento.improved;
+package memento.improved;
 
 
 import java.awt.geom.Point2D;

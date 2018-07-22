@@ -1,4 +1,4 @@
-package behavioral.chainofresponsibility.improved;
+package chainofresponsibility.improved;
 
 
 public class PaymentCheckoutHandler extends CheckoutHandler{

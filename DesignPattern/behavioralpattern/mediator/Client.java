@@ -1,4 +1,4 @@
-package behavioral.mediator;
+package mediator;
 
 
 public class Client {

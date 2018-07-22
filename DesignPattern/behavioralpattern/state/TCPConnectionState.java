@@ -1,4 +1,4 @@
-package behavioral.state;
+package state;
 
 
 public enum TCPConnectionState {

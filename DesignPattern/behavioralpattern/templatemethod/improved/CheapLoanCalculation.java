@@ -1,4 +1,4 @@
-package behavioral.templatemethod.improved;
+package templatemethod.improved;
 
 
 public class CheapLoanCalculation extends LoanCalculationAlgorithm {

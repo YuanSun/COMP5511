@@ -1,4 +1,4 @@
-package behavioral.state;
+package state;
 
 
 public class Client {
@@ -11,7 +11,7 @@ public class Client {
         connection.acknowledge();
         connection.close();
 
-        //connection.acknowledge();
+//        connection.acknowledge();
     }
 
 }

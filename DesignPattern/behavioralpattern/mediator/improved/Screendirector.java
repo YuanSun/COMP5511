@@ -1,4 +1,4 @@
-package behavioral.mediator.improved;
+package mediator.improved;
 
 
 public interface Screendirector {

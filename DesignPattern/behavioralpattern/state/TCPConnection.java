@@ -1,4 +1,4 @@
-package behavioral.state;
+package state;
 
 
 public class TCPConnection {

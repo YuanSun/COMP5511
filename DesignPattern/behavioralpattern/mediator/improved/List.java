@@ -1,4 +1,4 @@
-package behavioral.mediator.improved;
+package mediator.improved;
 
 
 import java.util.ArrayList;
