@@ -1,4 +1,4 @@
-package additional.dto;
+package dto;
 
 
 public class DomainObjectDTO {

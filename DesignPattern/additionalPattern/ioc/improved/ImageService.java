@@ -1,4 +1,4 @@
-package additional.ioc.improved;
+package ioc.improved;
 
 
 public class ImageService {

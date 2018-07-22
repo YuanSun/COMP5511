@@ -1,4 +1,4 @@
-package additional.ioc.improved;
+package ioc.improved;
 
 
 public class Container {
@@ -7,7 +7,9 @@ public class Container {
 
     public void init(){
         imageService = new ImageService();
-        imageService.setFileSystem(new UnixFileSystem());
+        
+        // set injection
+        imageService.setFileSystem(new WindowsFileSystem());
     }
 
     public ImageService getImageService() {
