@@ -12,7 +12,7 @@ import java.util.Map;
 public class MaxChar {
   static Map<Character, Integer> findMaxChar(String str) {
     Map<Character, Integer> charMap = new HashMap<>();
-
+    
     // construct char map
     for (Character ch : str.toCharArray()) {
       if (charMap.get(ch) == null) {

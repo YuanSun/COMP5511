@@ -1,6 +1,8 @@
 package spiralMatirx;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class App {
 
@@ -11,7 +13,8 @@ public class App {
       System.out.println(result.get(i));
     }
     
-
+    Map<Integer, Integer> map = new HashMap<>();
+    StringBuilder sb = new StringBuilder();
   }
 
 }
