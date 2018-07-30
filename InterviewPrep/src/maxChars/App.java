@@ -1,6 +1,7 @@
 package maxChars;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 public class App {
 
@@ -14,6 +15,8 @@ public class App {
     maxChar.entrySet().stream().forEach((e) -> {
       System.out.println(e.getKey() + " -- " + e.getValue());
     });
+    
+    Map table = new TreeMap();
 
   }
 

@@ -8,6 +8,7 @@ public class AccessPlay {
   }
 
   public void decrementPlay() throws InterruptedException {
-    play.decrementNumber();
+    for (int i = 0; i < play.N; i++)
+      Play.number --;
   }
 }

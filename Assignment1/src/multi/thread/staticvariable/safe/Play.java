@@ -3,11 +3,11 @@ package multi.thread.staticvariable.safe;
 import java.util.Random;
 
 public class Play {
-  public static int number;
+  public static int number = 0;
   public static final int N = 101;
 
   public Play() {
-    number = 0;
+    
   }
 
   public synchronized void incrementNumber() throws InterruptedException {
